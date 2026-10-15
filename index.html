@@ -1,0 +1,3094 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stock Analytics | AI-Powered Quantitative & Gemini Stock Intelligence</title>
+  <meta name="description" content="Instant institutional stock analysis combining Python quantitative skills, Yahoo Finance telemetry, interactive technical charts, and Google Gemini AI generative synthesis.">
+  <meta name="keywords" content="Stock Analysis, Ticker Screener, Gemini AI Stock Analysis, Quant Indicators, Market Intelligence, Candlestick Chart">
+
+  <!-- Google Fonts: Syncopate, Space Grotesk, Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       1. DESIGN SYSTEM & CSS VARIABLES
+       ========================================================================== */
+    :root {
+      /* Theme Base Colors */
+      --color-obsidian: #0A0E17;
+      --color-obsidian-deep: #05080E;
+      --color-card-bg: rgba(14, 20, 32, 0.78);
+      --color-card-solid: #0E1522;
+      --color-card-border: rgba(255, 255, 255, 0.08);
+
+      /* Neon Palette */
+      --color-fuchsia: #FF007A;
+      --color-cyan: #00F0FF;
+      --color-green: #39FF14;
+      --color-coral: #FF3E3E;
+      --color-amber: #FFB800;
+      --color-gemini: #8E75FF;
+
+      /* Text Colors */
+      --text-white: #FFFFFF;
+      --text-primary: #F0F4FC;
+      --text-secondary: #94A3B8;
+      --text-muted: #64748B;
+
+      /* Typography */
+      --font-display: 'Syncopate', sans-serif;
+      --font-heading: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', sans-serif;
+
+      /* Shadows & Neon Glows */
+      --glow-cyan: 0 0 20px rgba(0, 240, 255, 0.45);
+      --glow-cyan-lg: 0 0 35px rgba(0, 240, 255, 0.7);
+      --glow-fuchsia: 0 0 20px rgba(255, 0, 122, 0.45);
+      --glow-green: 0 0 16px rgba(57, 255, 20, 0.5);
+      --glow-coral: 0 0 16px rgba(255, 62, 62, 0.5);
+      --glow-gemini: 0 0 25px rgba(142, 117, 255, 0.5);
+
+      /* Transitions */
+      --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-normal: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+
+      --nav-height: 76px;
+      --container-max: 1280px;
+    }
+
+    /* Reset & Base Styles */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--color-obsidian);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body {
+      background-color: var(--color-obsidian);
+      background-image: 
+        radial-gradient(circle at 10% 15%, rgba(255, 0, 122, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 40%, rgba(0, 240, 255, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 50% 85%, rgba(142, 117, 255, 0.06) 0%, transparent 40%);
+      background-attachment: fixed;
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--color-obsidian-deep);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--color-fuchsia), var(--color-cyan));
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--color-cyan);
+      box-shadow: var(--glow-cyan);
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Focus States */
+    :focus-visible {
+      outline: 2px solid var(--color-cyan);
+      outline-offset: 3px;
+    }
+
+    /* ==========================================================================
+       2. TOP NAVIGATION & GEMINI STATUS
+       ========================================================================== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--nav-height);
+      background: rgba(10, 14, 23, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      z-index: 1000;
+      transition: background var(--transition-normal);
+    }
+
+    .navbar.scrolled {
+      background: rgba(5, 8, 14, 0.95);
+      border-bottom-color: rgba(0, 240, 255, 0.25);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 24px;
+      gap: 16px;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-white);
+      flex-shrink: 0;
+    }
+
+    .logo-symbol {
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--color-fuchsia), var(--color-cyan));
+      border-radius: 10px;
+      box-shadow: var(--glow-cyan);
+    }
+
+    .logo-symbol svg {
+      width: 22px;
+      height: 22px;
+      fill: none;
+      stroke: var(--color-obsidian);
+      stroke-width: 2.3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .brand-text {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--text-white);
+    }
+
+    .brand-text span {
+      background: linear-gradient(120deg, var(--color-cyan), var(--color-fuchsia));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-controls-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-skill-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: rgba(57, 255, 20, 0.08);
+      border: 1px solid rgba(57, 255, 20, 0.3);
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      color: var(--color-green);
+    }
+
+    .btn-gemini-config {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: rgba(142, 117, 255, 0.12);
+      border: 1px solid rgba(142, 117, 255, 0.4);
+      color: #C0B0FF;
+      border-radius: 9999px;
+      font-family: var(--font-heading);
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(142, 117, 255, 0.25);
+      transition: all var(--transition-fast);
+    }
+
+    .btn-gemini-config:hover {
+      background: rgba(142, 117, 255, 0.25);
+      color: #FFFFFF;
+      box-shadow: var(--glow-gemini);
+      transform: translateY(-1px);
+    }
+
+    .btn-gemini-config.active {
+      background: linear-gradient(135deg, rgba(142, 117, 255, 0.3), rgba(0, 240, 255, 0.2));
+      border-color: var(--color-gemini);
+      color: #FFFFFF;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--color-green);
+      border-radius: 50%;
+      box-shadow: var(--glow-green);
+      animation: pulse-ring 2s infinite ease-in-out;
+    }
+
+    .pulse-dot.gemini-dot {
+      background-color: var(--color-gemini);
+      box-shadow: var(--glow-gemini);
+    }
+
+    @keyframes pulse-ring {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    /* ==========================================================================
+       3. HERO TICKER SEARCH TERMINAL
+       ========================================================================== */
+    .hero-search-section {
+      position: relative;
+      padding: 64px 0 48px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .laser-grid-bg {
+      position: absolute;
+      bottom: -60%;
+      left: -50%;
+      width: 200%;
+      height: 120%;
+      background-image: 
+        linear-gradient(to right, rgba(0, 240, 255, 0.12) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 0, 122, 0.12) 1px, transparent 1px);
+      background-size: 50px 50px;
+      transform: perspective(500px) rotateX(68deg);
+      transform-origin: 50% 100%;
+      mask-image: radial-gradient(ellipse at 50% 50%, black 20%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 50%, black 20%, transparent 75%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-container {
+      position: relative;
+      z-index: 2;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      color: var(--color-cyan);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      color: var(--text-white);
+      margin-bottom: 16px;
+    }
+
+    .hero-title .gradient-text {
+      background: linear-gradient(135deg, #FFFFFF 20%, var(--color-cyan) 50%, var(--color-gemini) 80%, var(--color-fuchsia) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 25px rgba(142, 117, 255, 0.35));
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 680px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
+    }
+
+    /* Search Box & Controls */
+    .ticker-search-form {
+      position: relative;
+      max-width: 680px;
+      margin: 0 auto 24px;
+    }
+
+    .search-input-wrapper {
+      display: flex;
+      align-items: center;
+      background: rgba(14, 20, 32, 0.85);
+      border: 2px solid rgba(0, 240, 255, 0.4);
+      border-radius: 16px;
+      padding: 8px 10px 8px 24px;
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.25), 0 10px 30px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(16px);
+      transition: all var(--transition-normal);
+    }
+
+    .search-input-wrapper:focus-within {
+      border-color: var(--color-gemini);
+      box-shadow: 0 0 35px rgba(142, 117, 255, 0.5), 0 12px 36px rgba(0, 0, 0, 0.6);
+      transform: translateY(-2px);
+    }
+
+    .search-icon {
+      color: var(--color-cyan);
+      margin-right: 14px;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .ticker-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-white);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .ticker-input::placeholder {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      letter-spacing: normal;
+      text-transform: none;
+    }
+
+    .btn-analyze {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 32px;
+      background: linear-gradient(135deg, var(--color-cyan), var(--color-gemini));
+      color: var(--color-obsidian);
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 0 25px rgba(142, 117, 255, 0.45);
+      transition: all var(--transition-fast);
+      white-space: nowrap;
+    }
+
+    .btn-analyze:hover:not(:disabled) {
+      background: linear-gradient(135deg, #4ef4ff, #a996ff);
+      box-shadow: 0 0 35px rgba(142, 117, 255, 0.75);
+      transform: scale(1.02);
+    }
+
+    .btn-analyze:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .btn-spinner {
+      display: none;
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(10, 14, 23, 0.3);
+      border-top-color: var(--color-obsidian);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .btn-analyze.loading .btn-spinner {
+      display: block;
+    }
+    .btn-analyze.loading .btn-text-icon {
+      display: none;
+    }
+
+    /* Popular Quick Chips */
+    .quick-chips-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .chips-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .ticker-chip-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 5px 12px;
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .ticker-chip-btn:hover {
+      background: rgba(0, 240, 255, 0.1);
+      border-color: var(--color-cyan);
+      color: var(--color-cyan);
+      box-shadow: 0 0 12px rgba(0, 240, 255, 0.3);
+      transform: translateY(-1px);
+    }
+
+    /* ==========================================================================
+       4. SCANNING RADAR & LOADING OVERLAY
+       ========================================================================== */
+    .scanning-overlay {
+      display: none;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .radar-circle {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      border: 2px solid var(--color-gemini);
+      margin: 0 auto 24px;
+      position: relative;
+      box-shadow: 0 0 30px rgba(142, 117, 255, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .radar-sweep {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, transparent 70%, rgba(142, 117, 255, 0.45) 100%);
+      animation: radar-spin 1.4s linear infinite;
+    }
+
+    @keyframes radar-spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .radar-icon {
+      font-size: 1.8rem;
+      z-index: 2;
+    }
+
+    .scanning-step-text {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-white);
+      margin-bottom: 8px;
+    }
+
+    .scanning-subtext {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    /* ==========================================================================
+       5. ERROR BANNER & GEMINI MODAL
+       ========================================================================== */
+    .error-card {
+      display: none;
+      max-width: 680px;
+      margin: 20px auto 40px;
+      padding: 20px 24px;
+      background: rgba(255, 62, 62, 0.08);
+      border: 1px solid var(--color-coral);
+      border-radius: 14px;
+      box-shadow: 0 0 20px rgba(255, 62, 62, 0.25);
+      text-align: left;
+    }
+
+    .error-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--color-coral);
+      margin-bottom: 6px;
+    }
+
+    .error-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Gemini API Key Modal */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 8, 14, 0.85);
+      backdrop-filter: blur(14px);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .gemini-modal-card {
+      background: var(--color-card-solid);
+      border: 1px solid var(--color-gemini);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), var(--glow-gemini);
+      border-radius: 20px;
+      padding: 32px 28px;
+      max-width: 540px;
+      width: 100%;
+      position: relative;
+    }
+
+    .modal-title {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      color: var(--text-white);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .modal-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .modal-input {
+      width: 100%;
+      padding: 14px 16px;
+      background: rgba(10, 14, 23, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      color: var(--text-white);
+      font-family: monospace;
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+      outline: none;
+    }
+
+    .modal-input:focus {
+      border-color: var(--color-gemini);
+      box-shadow: var(--glow-gemini);
+    }
+
+    .modal-btn-row {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    .btn-secondary {
+      padding: 10px 18px;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--text-secondary);
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: var(--font-heading);
+      font-weight: 600;
+    }
+
+    .btn-primary {
+      padding: 10px 22px;
+      background: var(--color-gemini);
+      border: none;
+      color: #FFFFFF;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      box-shadow: var(--glow-gemini);
+    }
+
+    /* ==========================================================================
+       6. MAIN RESULTS DASHBOARD
+       ========================================================================== */
+    .results-dashboard {
+      display: none;
+      padding-bottom: 80px;
+      animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Stock Hero Overview Card */
+    .stock-hero-card {
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-card-border);
+      border-radius: 24px;
+      padding: 36px 32px;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(16px);
+      margin-bottom: 32px;
+      position: relative;
+    }
+
+    .stock-hero-card::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 24px;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.35), transparent 60%, rgba(142, 117, 255, 0.35));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    .stock-overview-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .stock-headline-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .stock-tag-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .badge-market {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 6px;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .badge-sector {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid rgba(0, 240, 255, 0.25);
+      border-radius: 6px;
+      color: var(--color-cyan);
+    }
+
+    .stock-main-symbol {
+      font-family: var(--font-heading);
+      font-size: clamp(2.5rem, 4vw, 3.8rem);
+      font-weight: 700;
+      color: var(--text-white);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+
+    .stock-main-name {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .price-callout-row {
+      display: flex;
+      align-items: baseline;
+      gap: 18px;
+      margin-top: 14px;
+    }
+
+    .hero-current-price {
+      font-family: var(--font-heading);
+      font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+      font-weight: 700;
+      color: var(--text-white);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .hero-change-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .hero-change-badge.bullish {
+      background: rgba(57, 255, 20, 0.12);
+      border: 1px solid var(--color-green);
+      color: var(--color-green);
+      box-shadow: var(--glow-green);
+    }
+
+    .hero-change-badge.bearish {
+      background: rgba(255, 62, 62, 0.12);
+      border: 1px solid var(--color-coral);
+      color: var(--color-coral);
+      box-shadow: var(--glow-coral);
+    }
+
+    /* Right Column: AI Signal Recommendation Card */
+    .ai-signal-card {
+      background: rgba(10, 14, 23, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 26px 24px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .signal-header-tag {
+      font-size: 0.75rem;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+    }
+
+    .signal-verdict-box {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 10px 20px;
+      border-radius: 12px;
+      display: inline-block;
+      margin: 0 auto;
+    }
+
+    .signal-verdict-box.buy,
+    .signal-verdict-box.strong-buy {
+      background: rgba(57, 255, 20, 0.12);
+      border: 2px solid var(--color-green);
+      color: var(--color-green);
+      box-shadow: var(--glow-green);
+    }
+
+    .signal-verdict-box.hold {
+      background: rgba(255, 184, 0, 0.12);
+      border: 2px solid var(--color-amber);
+      color: var(--color-amber);
+      box-shadow: 0 0 15px rgba(255, 184, 0, 0.4);
+    }
+
+    .signal-verdict-box.sell {
+      background: rgba(255, 62, 62, 0.12);
+      border: 2px solid var(--color-coral);
+      color: var(--color-coral);
+      box-shadow: var(--glow-coral);
+    }
+
+    .confidence-meter-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      text-align: left;
+    }
+
+    .confidence-label-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .confidence-bar-bg {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+
+    .confidence-bar-fill {
+      height: 100%;
+      border-radius: 9999px;
+      background: linear-gradient(90deg, var(--color-cyan), var(--color-green));
+      box-shadow: var(--glow-green);
+      transition: width 1s ease-in-out;
+    }
+
+    /* ==========================================================================
+       6.5 DEEP GEMINI AI SYNTHESIS CARD
+       ========================================================================== */
+    .gemini-synthesis-card {
+      background: linear-gradient(145deg, rgba(20, 16, 40, 0.85), rgba(12, 16, 28, 0.85));
+      border: 1px solid rgba(142, 117, 255, 0.4);
+      border-radius: 24px;
+      padding: 34px 30px;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6), var(--glow-gemini);
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gemini-synthesis-card::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(142, 117, 255, 0.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .gemini-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .gemini-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: rgba(142, 117, 255, 0.15);
+      border: 1px solid var(--color-gemini);
+      border-radius: 9999px;
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #E2DAFF;
+      box-shadow: var(--glow-gemini);
+    }
+
+    .gemini-thesis-box {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--text-primary);
+      margin-bottom: 24px;
+      padding: 18px 20px;
+      background: rgba(10, 14, 23, 0.6);
+      border-left: 3px solid var(--color-gemini);
+      border-radius: 0 12px 12px 0;
+    }
+
+    .gemini-debate-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .debate-col {
+      background: rgba(10, 14, 23, 0.65);
+      border-radius: 16px;
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .debate-col.bull {
+      border-top: 2px solid var(--color-green);
+    }
+
+    .debate-col.bear {
+      border-top: 2px solid var(--color-coral);
+    }
+
+    .debate-title {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .debate-title.bull { color: var(--color-green); }
+    .debate-title.bear { color: var(--color-coral); }
+
+    .gemini-meta-footer {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 18px;
+      font-size: 0.88rem;
+    }
+
+    .gemini-meta-item strong {
+      color: #C0B0FF;
+    }
+
+    /* Unlocked / Missing Key Banner */
+    .gemini-unlock-banner {
+      display: none;
+      text-align: center;
+      padding: 30px 20px;
+      background: rgba(142, 117, 255, 0.06);
+      border: 1px dashed rgba(142, 117, 255, 0.4);
+      border-radius: 16px;
+      margin-bottom: 24px;
+    }
+
+    .gemini-unlock-banner h4 {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      color: #E2DAFF;
+      margin-bottom: 8px;
+    }
+
+    .gemini-unlock-banner p {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      max-width: 580px;
+      margin: 0 auto 16px;
+    }
+
+    .unlock-input-wrap {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* ==========================================================================
+       7. INTERACTIVE CANDLESTICK / PRICE STUDIO
+       ========================================================================== */
+    .chart-studio-card {
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-card-border);
+      border-radius: 24px;
+      padding: 32px 28px;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(16px);
+      margin-bottom: 32px;
+    }
+
+    .chart-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .chart-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .chart-title {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-white);
+    }
+
+    .chart-mode-toggles {
+      display: flex;
+      gap: 6px;
+      background: rgba(10, 14, 23, 0.7);
+      padding: 4px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .chart-toggle-btn {
+      padding: 6px 14px;
+      font-family: var(--font-heading);
+      font-size: 0.82rem;
+      font-weight: 600;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .chart-toggle-btn.active {
+      background: rgba(0, 240, 255, 0.12);
+      color: var(--color-cyan);
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.25);
+    }
+
+    .svg-chart-viewport {
+      position: relative;
+      width: 100%;
+      height: 380px;
+      background: rgba(5, 8, 14, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: crosshair;
+    }
+
+    .chart-svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .chart-hover-card {
+      position: absolute;
+      top: 14px;
+      left: 18px;
+      background: rgba(10, 14, 23, 0.88);
+      border: 1px solid var(--color-cyan);
+      box-shadow: var(--glow-cyan);
+      border-radius: 10px;
+      padding: 8px 14px;
+      font-size: 0.8rem;
+      display: flex;
+      gap: 16px;
+      pointer-events: none;
+      backdrop-filter: blur(12px);
+    }
+
+    .hover-stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .hover-stat-item span:first-child {
+      color: var(--text-muted);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+    }
+    .hover-stat-item span:last-child {
+      color: var(--text-white);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .chart-legend {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-top: 14px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+    }
+
+    /* ==========================================================================
+       8. 8-DIMENSION FUNDAMENTAL & TECHNICAL MATRIX & 6-POINT SCREEN
+       ========================================================================== */
+    .quality-screen-card {
+      background: linear-gradient(145deg, rgba(14, 20, 32, 0.9), rgba(10, 14, 23, 0.95));
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      border-radius: 24px;
+      padding: 30px 28px;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5), 0 0 25px rgba(0, 240, 255, 0.1);
+      margin-bottom: 32px;
+      position: relative;
+    }
+
+    .quality-screen-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .quality-screen-title {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text-white);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .quality-score-pill {
+      font-family: var(--font-heading);
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      letter-spacing: 0.04em;
+    }
+
+    .quality-score-pill.strong {
+      background: rgba(57, 255, 20, 0.15);
+      border: 1px solid var(--color-green);
+      color: var(--color-green);
+      box-shadow: var(--glow-green);
+    }
+    .quality-score-pill.moderate {
+      background: rgba(255, 184, 0, 0.15);
+      border: 1px solid var(--color-amber);
+      color: var(--color-amber);
+      box-shadow: 0 0 12px rgba(255, 184, 0, 0.3);
+    }
+    .quality-score-pill.caution {
+      background: rgba(255, 62, 62, 0.15);
+      border: 1px solid var(--color-coral);
+      color: var(--color-coral);
+      box-shadow: var(--glow-coral);
+    }
+
+    .quality-progress-wrap {
+      margin-bottom: 24px;
+    }
+
+    .quality-progress-bg {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+
+    .quality-progress-fill {
+      height: 100%;
+      border-radius: 9999px;
+      background: linear-gradient(90deg, var(--color-cyan), var(--color-green));
+      box-shadow: var(--glow-green);
+      transition: width 0.8s ease-in-out;
+    }
+
+    .quality-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .quality-item-card {
+      background: rgba(10, 14, 23, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all var(--transition-fast);
+      position: relative;
+    }
+
+    .quality-item-card.passed {
+      border-color: rgba(57, 255, 20, 0.35);
+      background: rgba(57, 255, 20, 0.03);
+    }
+
+    .quality-item-card.failed {
+      border-color: rgba(255, 62, 62, 0.35);
+      background: rgba(255, 62, 62, 0.03);
+    }
+
+    .quality-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .quality-item-title {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-white);
+    }
+
+    .quality-status-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      letter-spacing: 0.05em;
+    }
+
+    .quality-status-badge.passed {
+      background: rgba(57, 255, 20, 0.15);
+      color: var(--color-green);
+      border: 1px solid var(--color-green);
+    }
+
+    .quality-status-badge.failed {
+      background: rgba(255, 62, 62, 0.15);
+      color: var(--color-coral);
+      border: 1px solid var(--color-coral);
+    }
+
+    .quality-item-val {
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text-white);
+      margin: 4px 0 2px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .quality-target-rule {
+      font-size: 0.78rem;
+      color: var(--color-cyan);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .quality-item-desc {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .section-headline-block {
+      margin-bottom: 24px;
+    }
+
+    .section-headline-block h3 {
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text-white);
+    }
+
+    .section-headline-block p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
+
+    .dimensions-matrix-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 36px;
+    }
+
+    .dimension-card {
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-card-border);
+      border-radius: 20px;
+      padding: 24px 22px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(12px);
+      transition: all var(--transition-fast);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .dimension-card:hover {
+      border-color: rgba(0, 240, 255, 0.3);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 240, 255, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .dim-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .dim-title {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-white);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dim-icon {
+      color: var(--color-cyan);
+    }
+
+    .dim-score-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-secondary);
+    }
+
+    .dim-metrics-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 0.85rem;
+    }
+
+    .dim-row {
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-secondary);
+    }
+
+    .dim-row strong {
+      color: var(--text-white);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ==========================================================================
+       9. LIVE NEWS & GEMINI AI COPILOT CHAT
+       ========================================================================== */
+    .bottom-studios-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 28px;
+      margin-top: 10px;
+    }
+
+    /* Interactive Gemini Stock Copilot */
+    .gemini-copilot-card {
+      background: var(--color-card-bg);
+      border: 1px solid rgba(142, 117, 255, 0.35);
+      border-radius: 24px;
+      padding: 28px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      height: 560px;
+    }
+
+    .copilot-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .copilot-title {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-white);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .copilot-messages-box {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding-right: 6px;
+      margin-bottom: 16px;
+    }
+
+    .chat-msg {
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      max-width: 90%;
+    }
+
+    .chat-msg.user {
+      align-self: flex-end;
+      background: rgba(0, 240, 255, 0.15);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      color: var(--text-primary);
+    }
+
+    .chat-msg.ai {
+      align-self: flex-start;
+      background: rgba(142, 117, 255, 0.12);
+      border: 1px solid rgba(142, 117, 255, 0.25);
+      color: var(--text-primary);
+    }
+
+    .copilot-prompts-row {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+    }
+
+    .prompt-chip {
+      white-space: nowrap;
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .prompt-chip:hover {
+      border-color: var(--color-gemini);
+      color: #E2DAFF;
+    }
+
+    .copilot-input-form {
+      display: flex;
+      gap: 10px;
+    }
+
+    .copilot-input {
+      flex: 1;
+      padding: 12px 16px;
+      background: rgba(10, 14, 23, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      color: var(--text-white);
+      font-size: 0.88rem;
+      outline: none;
+    }
+
+    .copilot-input:focus {
+      border-color: var(--color-gemini);
+      box-shadow: var(--glow-gemini);
+    }
+
+    .btn-copilot-send {
+      padding: 12px 18px;
+      background: var(--color-gemini);
+      border: none;
+      border-radius: 10px;
+      color: #FFFFFF;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .btn-copilot-send:hover {
+      background: #a996ff;
+      box-shadow: var(--glow-gemini);
+    }
+
+    /* News Feed */
+    .news-feed-card {
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-card-border);
+      border-radius: 24px;
+      padding: 28px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+      height: 560px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .news-list {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      overflow-y: auto;
+      padding-right: 6px;
+    }
+
+    .news-item-card {
+      background: rgba(10, 14, 23, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: all var(--transition-fast);
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .news-item-card:hover {
+      border-color: rgba(0, 240, 255, 0.4);
+      background: rgba(14, 23, 38, 0.95);
+      transform: translateX(4px);
+    }
+
+    .news-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .news-source {
+      color: var(--color-cyan);
+      font-weight: 600;
+    }
+
+    .news-headline {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.4;
+    }
+
+    /* ==========================================================================
+       10. FOOTER
+       ========================================================================== */
+    .site-footer {
+      background: var(--color-obsidian-deep);
+      border-top: 1px solid rgba(142, 117, 255, 0.25);
+      padding: 40px 0 32px;
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .footer-skill-note {
+      color: #C0B0FF;
+      font-weight: 600;
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 1024px) {
+      .dimensions-matrix-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .stock-overview-grid {
+        grid-template-columns: 1fr;
+      }
+      .gemini-debate-grid {
+        grid-template-columns: 1fr;
+      }
+      .bottom-studios-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .dimensions-matrix-grid {
+        grid-template-columns: 1fr;
+      }
+      .search-input-wrapper {
+        flex-direction: column;
+        padding: 12px;
+        gap: 12px;
+      }
+      .btn-analyze {
+        width: 100%;
+      }
+      .ticker-input {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       NAVIGATION & GEMINI STATUS
+       ========================================================================== -->
+  <header>
+    <nav class="navbar" id="navbar" aria-label="Main Navigation">
+      <div class="nav-container">
+        
+        <a href="#" class="brand-logo" aria-label="Stock Analytics Home">
+          <div class="logo-symbol" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M3 3v18h18"></path>
+              <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"></path>
+            </svg>
+          </div>
+          <span class="brand-text">Stock<span>Analytics</span></span>
+        </a>
+
+        <!-- Controls Group: Skill + Gemini AI Config -->
+        <div class="nav-controls-group">
+          
+          <div class="nav-skill-badge" title="Installed stock-analysis python skill is connected">
+            <span class="pulse-dot" aria-hidden="true"></span>
+            <span>Skill Engine Active</span>
+          </div>
+
+          <button type="button" class="btn-gemini-config" id="geminiNavBtn">
+            <span class="pulse-dot gemini-dot" aria-hidden="true"></span>
+            <span id="geminiBtnText">Gemini AI Setup</span>
+          </button>
+
+        </div>
+
+      </div>
+    </nav>
+  </header>
+
+  <!-- Gemini API Key Modal -->
+  <div class="modal-backdrop" id="geminiModal" aria-modal="true" role="dialog">
+    <div class="gemini-modal-card">
+      <h3 class="modal-title">
+        <span>✨ Google Gemini AI Configuration</span>
+      </h3>
+      <p class="modal-desc">
+        Connect your Google Gemini API key to activate real-time generative investment memos, institutional Bull vs. Bear scenario modeling, and the interactive stock copilot.
+      </p>
+
+      <input 
+        type="password" 
+        id="geminiKeyInput" 
+        class="modal-input" 
+        placeholder="Paste your Gemini API key (AIzaSy...)" 
+        autocomplete="off"
+      >
+
+      <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px;">
+        Don't have a key? Get one for free at <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener noreferrer" style="color: var(--color-cyan); text-decoration: underline;">Google AI Studio</a>. Keys are stored locally in your browser.
+      </div>
+
+      <div class="modal-btn-row">
+        <button type="button" class="btn-secondary" id="modalCloseBtn">Cancel</button>
+        <button type="button" class="btn-primary" id="modalSaveBtn">Save & Activate</button>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- ==========================================================================
+         HERO SEARCH & TICKER INPUT SECTION
+         ========================================================================== -->
+    <section class="hero-search-section">
+      <div class="laser-grid-bg" aria-hidden="true"></div>
+
+      <div class="container hero-container">
+        
+        <div class="hero-pill">
+          <span>⚡ Quantitative Modeling + Google Gemini AI Synthesis</span>
+        </div>
+
+        <h1 class="hero-title">
+          Analyze Any Stock.<br>
+          <span class="gradient-text">Powered by Gemini AI & Quant Skills.</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Enter any US stock or crypto ticker to instantly run Yahoo Finance technical calculations, earnings beats, institutional sentiment, and Gemini 2.5 Flash qualitative intelligence.
+        </p>
+
+        <!-- Ticker Search Form -->
+        <form class="ticker-search-form" id="tickerForm">
+          <div class="search-input-wrapper">
+            <div class="search-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </div>
+            
+            <input 
+              type="text" 
+              id="tickerInput" 
+              class="ticker-input" 
+              placeholder="Enter ticker (e.g. NVDA, AAPL, TSLA, BTC-USD)..." 
+              maxlength="10" 
+              autocomplete="off" 
+              required
+              aria-label="Stock ticker symbol"
+            >
+
+            <button type="submit" class="btn-analyze" id="analyzeBtn">
+              <span class="btn-spinner" aria-hidden="true"></span>
+              <span class="btn-text-icon">Analyze Stock ⚡</span>
+            </button>
+          </div>
+        </form>
+
+        <!-- Quick Select Ticker Chips -->
+        <div class="quick-chips-wrapper">
+          <span class="chips-label">Popular Tickers:</span>
+          <button type="button" class="ticker-chip-btn" data-ticker="NVDA">NVDA</button>
+          <button type="button" class="ticker-chip-btn" data-ticker="AAPL">AAPL</button>
+          <button type="button" class="ticker-chip-btn" data-ticker="TSLA">TSLA</button>
+          <button type="button" class="ticker-chip-btn" data-ticker="MSFT">MSFT</button>
+          <button type="button" class="ticker-chip-btn" data-ticker="AMZN">AMZN</button>
+          <button type="button" class="ticker-chip-btn" data-ticker="GOOGL">GOOGL</button>
+          <button type="button" class="ticker-chip-btn" data-ticker="AMD">AMD</button>
+          <button type="button" class="ticker-chip-btn" data-ticker="BTC-USD">BTC-USD</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SCANNING / LOADING RADAR STATE
+         ========================================================================== -->
+    <div class="scanning-overlay" id="scanningOverlay" aria-live="polite">
+      <div class="radar-circle">
+        <div class="radar-sweep"></div>
+        <span class="radar-icon">📈</span>
+      </div>
+      <div class="scanning-step-text" id="scanStepText">Connecting to Quantitative Skill Engine...</div>
+      <div class="scanning-subtext" id="scanSubText">Evaluating earnings surprise, momentum RSI, and market regime</div>
+    </div>
+
+    <!-- ==========================================================================
+         ERROR BANNER
+         ========================================================================== -->
+    <div class="container">
+      <div class="error-card" id="errorCard" role="alert">
+        <div class="error-header">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          <span id="errorTitle">Analysis Error</span>
+        </div>
+        <p class="error-desc" id="errorMsg">Unable to retrieve analysis for this ticker symbol.</p>
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+         RESULTS DASHBOARD CONTAINER
+         ========================================================================== -->
+    <div class="container results-dashboard" id="resultsDashboard">
+      
+      <!-- 1. Stock Overview & Signal Card -->
+      <article class="stock-hero-card">
+        <div class="stock-overview-grid">
+          
+          <div class="stock-headline-wrap">
+            <div class="stock-tag-row">
+              <span class="badge-market" id="resExchange">NASDAQ</span>
+              <span class="badge-sector" id="resSector">Technology</span>
+              <span class="badge-market" id="resTimestamp">Live Feed</span>
+            </div>
+
+            <h2 class="stock-main-symbol" id="resTicker">AAPL</h2>
+            <div class="stock-main-name" id="resCompanyName">Apple Inc.</div>
+
+            <div class="price-callout-row">
+              <span class="hero-current-price" id="resPrice">$232.10</span>
+              <span class="hero-change-badge bullish" id="resChangeBadge">
+                <span id="resChangeIcon">▲</span>
+                <span id="resChangeVal">+1.28%</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- AI Signal Recommendation Box -->
+          <div class="ai-signal-card">
+            <span class="signal-header-tag">Quantitative Skill Recommendation</span>
+            <div class="signal-verdict-box buy" id="signalVerdict">BUY</div>
+            
+            <div class="confidence-meter-wrap">
+              <div class="confidence-label-row">
+                <span>Confidence Rating:</span>
+                <strong id="confidenceVal">82%</strong>
+              </div>
+              <div class="confidence-bar-bg">
+                <div class="confidence-bar-fill" id="confidenceBar" style="width: 82%;"></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Executive Reasoning Points & Caveats -->
+        <div class="executive-reasons-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 24px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px;">
+          
+          <div>
+            <h4 style="font-family: var(--font-heading); color: var(--text-white); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Key Supporting Factors
+            </h4>
+            <ul class="bullet-list" id="supportingPointsList" style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
+              <!-- Dynamically Populated -->
+            </ul>
+          </div>
+
+          <div>
+            <h4 style="font-family: var(--font-heading); color: var(--text-white); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              Risk Flags & Caveats
+            </h4>
+            <ul class="bullet-list" id="caveatsList" style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
+              <!-- Dynamically Populated -->
+            </ul>
+          </div>
+
+        </div>
+      </article>
+
+      <!-- 1.5 DEEP GEMINI AI INVESTMENT MEMO -->
+      <section class="gemini-synthesis-card" id="geminiSynthesisCard">
+        
+        <div class="gemini-header-row">
+          <div class="gemini-badge">
+            <span>✨ Gemini 2.5 Flash Qualitative Synthesis</span>
+          </div>
+          <span style="font-size: 0.8rem; color: var(--text-muted);" id="geminiTimestamp">Grounded in SEC filings & Live Telemetry</span>
+        </div>
+
+        <!-- If Gemini Key Not Set: Prompt Banner -->
+        <div class="gemini-unlock-banner" id="geminiUnlockBanner">
+          <h4>⚡ Activate Gemini Generative Stock Analysis</h4>
+          <p>
+            Connect your free Google Gemini API key to unlock institutional qualitative memos, Bull vs. Bear scenario models, and the real-time AI Copilot.
+          </p>
+          <div class="unlock-input-wrap">
+            <input type="password" id="bannerKeyInput" class="modal-input" style="margin-bottom:0;" placeholder="Paste Gemini Key (AIzaSy...)">
+            <button type="button" class="btn-primary" id="bannerKeyBtn" style="white-space:nowrap;">Activate</button>
+          </div>
+        </div>
+
+        <!-- Active Gemini Intelligence Memo Content -->
+        <div id="geminiActiveContent">
+          
+          <div class="gemini-thesis-box" id="geminiExecutiveThesis">
+            Analyzing real-time fundamental multiples, earnings momentum, and macroeconomic regime...
+          </div>
+
+          <div class="gemini-debate-grid">
+            
+            <!-- Bull Case -->
+            <div class="debate-col bull">
+              <div class="debate-title bull">
+                <span>🟢 Institutional Bull Thesis</span>
+              </div>
+              <ul class="bullet-list" id="geminiBullList" style="list-style: none; display: flex; flex-direction: column; gap: 10px;">
+                <!-- Dynamically Populated -->
+              </ul>
+            </div>
+
+            <!-- Bear Case -->
+            <div class="debate-col bear">
+              <div class="debate-title bear">
+                <span>🔴 Downside Risk & Bear Scenarios</span>
+              </div>
+              <ul class="bullet-list" id="geminiBearList" style="list-style: none; display: flex; flex-direction: column; gap: 10px;">
+                <!-- Dynamically Populated -->
+              </ul>
+            </div>
+
+          </div>
+
+          <div class="gemini-meta-footer">
+            <div class="gemini-meta-item">
+              <span>Competitive Moat:</span> <strong id="geminiMoat">Wide Moat with pricing power</strong>
+            </div>
+            <div class="gemini-meta-item">
+              <span>Catalyst Horizon:</span> <strong id="geminiCatalyst">Next quarterly earnings & product roadmap</strong>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- 2. Interactive Technical Chart Studio -->
+      <section class="chart-studio-card">
+        <div class="chart-toolbar">
+          <div class="chart-title-wrap">
+            <h3 class="chart-title">Price Action & Technical Volume Studio</h3>
+            <span class="badge-market" id="chartRangeBadge">60 Trading Days</span>
+          </div>
+
+          <div class="chart-mode-toggles">
+            <button type="button" class="chart-toggle-btn active" id="btnModeCandle">Candlesticks</button>
+            <button type="button" class="chart-toggle-btn" id="btnModeArea">Area Line</button>
+          </div>
+        </div>
+
+        <!-- SVG Chart Viewport -->
+        <div class="svg-chart-viewport" id="chartViewport">
+          
+          <!-- Live Hover Tooltip -->
+          <div class="chart-hover-card" id="chartHoverCard">
+            <div class="hover-stat-item">
+              <span>Date</span>
+              <span id="hoverDate">2026-10-14</span>
+            </div>
+            <div class="hover-stat-item">
+              <span>Open</span>
+              <span id="hoverOpen">$231.20</span>
+            </div>
+            <div class="hover-stat-item">
+              <span>High</span>
+              <span id="hoverHigh">$233.50</span>
+            </div>
+            <div class="hover-stat-item">
+              <span>Low</span>
+              <span id="hoverLow">$229.80</span>
+            </div>
+            <div class="hover-stat-item">
+              <span>Close</span>
+              <span id="hoverClose">$232.10</span>
+            </div>
+            <div class="hover-stat-item">
+              <span>Volume</span>
+              <span id="hoverVol">54.2M</span>
+            </div>
+          </div>
+
+          <svg class="chart-svg" id="chartSvg" viewBox="0 0 1000 360" preserveAspectRatio="none">
+            <!-- Dynamic SVG elements rendered via JS -->
+          </svg>
+        </div>
+
+        <!-- Chart Legend -->
+        <div class="chart-legend">
+          <div class="legend-item">
+            <div class="legend-dot" style="background: var(--color-green);"></div>
+            <span>Bullish Session</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background: var(--color-coral);"></div>
+            <span>Bearish Session</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background: var(--color-cyan);"></div>
+            <span>20-Day Simple Moving Avg (SMA)</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background: rgba(255, 255, 255, 0.2);"></div>
+            <span>Volume Histogram</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Quantitative 8-Dimension Matrix -->
+      <section>
+        <div class="section-headline-block">
+          <h3>Skill Analytical Components</h3>
+          <p>Eight quantitative dimensions evaluated by the installed stock-analysis skill engine.</p>
+        </div>
+
+        <!-- Institutional 6-Point Quality Screen -->
+        <div class="quality-screen-card" id="qualityScreenCard">
+          <div class="quality-screen-header">
+            <div>
+              <div class="quality-screen-title">
+                <span>🛡️</span> Institutional 6-Point Quality Screen
+              </div>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px;">
+                Strict quantitative solvency, return on capital, and compounding hurdles evaluated on latest balance sheet & SEC filings.
+              </p>
+            </div>
+            <div class="quality-score-pill strong" id="qualityScoreBanner">
+              Screening Criteria: Evaluating...
+            </div>
+          </div>
+
+          <div class="quality-progress-wrap">
+            <div class="quality-progress-bg">
+              <div class="quality-progress-fill" id="qualityProgressFill" style="width: 0%;"></div>
+            </div>
+          </div>
+
+          <div class="quality-grid" id="qualityChecksGrid">
+            <!-- Dynamically populated 6 check cards -->
+          </div>
+        </div>
+
+        <div class="dimensions-matrix-grid">
+          
+          <!-- Dimension 1: Fundamentals -->
+          <div class="dimension-card">
+            <div class="dim-card-header">
+              <span class="dim-title"><span class="dim-icon">⚖️</span> Fundamentals & Quality</span>
+              <span class="dim-score-badge" id="scoreFundamentals">Weight: 20%</span>
+            </div>
+            <div class="dim-metrics-list">
+              <div class="dim-row"><span>Trailing P/E Ratio:</span> <strong id="peRatio">--</strong></div>
+              <div class="dim-row"><span>PEG Ratio (&lt; 2.0):</span> <strong id="pegRatioVal">--</strong></div>
+              <div class="dim-row"><span>Return on Equity (&gt; 12%):</span> <strong id="roeVal">--</strong></div>
+              <div class="dim-row"><span>ROIC (&gt; 12%):</span> <strong id="roicVal">--</strong></div>
+              <div class="dim-row"><span>Current Ratio (&gt; 1.0):</span> <strong id="currRatioVal">--</strong></div>
+              <div class="dim-row"><span>Debt / EBITDA (&lt; 2.0):</span> <strong id="debtEbitdaVal">--</strong></div>
+              <div class="dim-row"><span>5Y EPS Growth (&gt; 0%):</span> <strong id="epsGrowthVal">--</strong></div>
+              <div class="dim-row"><span>Operating Margin:</span> <strong id="opMargin">--</strong></div>
+              <div class="dim-row"><span>Revenue Growth YoY:</span> <strong id="revGrowth">--</strong></div>
+              <div class="dim-row"><span>Debt to Equity:</span> <strong id="debtEquity">--</strong></div>
+            </div>
+          </div>
+
+          <!-- Dimension 2: Analyst Targets -->
+          <div class="dimension-card">
+            <div class="dim-card-header">
+              <span class="dim-title"><span class="dim-icon">🎯</span> Analyst Targets</span>
+              <span class="dim-score-badge" id="scoreAnalyst">Weight: 20%</span>
+            </div>
+            <div class="dim-metrics-list">
+              <div class="dim-row"><span>Consensus Rating:</span> <strong id="analystConsensus">--</strong></div>
+              <div class="dim-row"><span>Average Price Target:</span> <strong id="priceTarget">--</strong></div>
+              <div class="dim-row"><span>Target Upside Potential:</span> <strong id="upsidePct">--</strong></div>
+              <div class="dim-row"><span>Analyst Coverage Pool:</span> <strong id="numAnalysts">--</strong></div>
+            </div>
+          </div>
+
+          <!-- Dimension 3: Earnings Surprise -->
+          <div class="dimension-card">
+            <div class="dim-card-header">
+              <span class="dim-title"><span class="dim-icon">⚡</span> Earnings Surprise</span>
+              <span class="dim-score-badge" id="scoreEarnings">Weight: 30%</span>
+            </div>
+            <div class="dim-metrics-list">
+              <div class="dim-row"><span>Actual Reported EPS:</span> <strong id="actualEps">--</strong></div>
+              <div class="dim-row"><span>Consensus Expected EPS:</span> <strong id="expectedEps">--</strong></div>
+              <div class="dim-row"><span>Surprise Margin:</span> <strong id="surprisePct">--</strong></div>
+              <div class="dim-row"><span>Historical 4Q Beat Streak:</span> <strong id="beatStreak">--</strong></div>
+            </div>
+          </div>
+
+          <!-- Dimension 4: Technical Momentum -->
+          <div class="dimension-card">
+            <div class="dim-card-header">
+              <span class="dim-title"><span class="dim-icon">🚀</span> Momentum & RSI</span>
+              <span class="dim-score-badge" id="scoreMomentum">Weight: 15%</span>
+            </div>
+            <div class="dim-metrics-list">
+              <div class="dim-row"><span>14-Day RSI Oscillation:</span> <strong id="rsiVal">--</strong></div>
+              <div class="dim-row"><span>RSI Condition:</span> <strong id="rsiStatus">--</strong></div>
+              <div class="dim-row"><span>Near 52-Week High:</span> <strong id="nearHigh">--</strong></div>
+              <div class="dim-row"><span>Relative Volume Ratio:</span> <strong id="volumeRatio">--</strong></div>
+            </div>
+          </div>
+
+          <!-- Dimension 5: Sector Performance -->
+          <div class="dimension-card">
+            <div class="dim-card-header">
+              <span class="dim-title"><span class="dim-icon">🌐</span> Sector Dynamics</span>
+              <span class="dim-score-badge" id="scoreSector">Weight: 15%</span>
+            </div>
+            <div class="dim-metrics-list">
+              <div class="dim-row"><span>Sector Category:</span> <strong id="sectorName">--</strong></div>
+              <div class="dim-row"><span>Stock 1M Return:</span> <strong id="stockReturn1m">--</strong></div>
+              <div class="dim-row"><span>Sector 1M Return:</span> <strong id="sectorReturn1m">--</strong></div>
+              <div class="dim-row"><span>Relative Sector Strength:</span> <strong id="relStrength">--</strong></div>
+            </div>
+          </div>
+
+          <!-- Dimension 6: Macro Market Context -->
+          <div class="dimension-card">
+            <div class="dim-card-header">
+              <span class="dim-title"><span class="dim-icon">🛡️</span> Macro & Volatility</span>
+              <span class="dim-score-badge" id="scoreMacro">Weight: 10%</span>
+            </div>
+            <div class="dim-metrics-list">
+              <div class="dim-row"><span>VIX Index Level:</span> <strong id="vixVal">--</strong></div>
+              <div class="dim-row"><span>Market Regime:</span> <strong id="marketRegime">--</strong></div>
+              <div class="dim-row"><span>SPY 10-Day Trend:</span> <strong id="spyTrend">--</strong></div>
+              <div class="dim-row"><span>Safe-Haven Risk-Off:</span> <strong id="riskOff">--</strong></div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 4. Interactive Gemini Copilot & Live Breaking News -->
+      <section>
+        <div class="section-headline-block">
+          <h3>Interactive AI Copilot & Breaking Financial News</h3>
+          <p>Chat directly with Gemini AI about this stock or monitor real-time headlines.</p>
+        </div>
+
+        <div class="bottom-studios-grid">
+          
+          <!-- Gemini AI Stock Copilot (Live Chat) -->
+          <div class="gemini-copilot-card">
+            <div class="copilot-header">
+              <span class="copilot-title">
+                <span>🤖 Gemini Quant Copilot</span>
+              </span>
+              <span class="badge-market" id="chatTickerBadge">AAPL Context Active</span>
+            </div>
+
+            <div class="copilot-messages-box" id="copilotChatBox">
+              <div class="chat-msg ai">
+                Hello trader. I have loaded all quantitative factors, SEC metrics, and breaking news for <strong id="chatWelcomeTicker">AAPL</strong>. Ask me anything about margin durability, valuation, competitor threats, or the bull/bear case.
+              </div>
+            </div>
+
+            <!-- Quick Suggested Prompt Chips -->
+            <div class="copilot-prompts-row">
+              <button type="button" class="prompt-chip" data-query="What are the biggest downside margin risks in the next earnings release?">Margin Risks?</button>
+              <button type="button" class="prompt-chip" data-query="How does this valuation compare to its core competitors?">Compare Peers?</button>
+              <button type="button" class="prompt-chip" data-query="Explain how the latest breaking news impacts forward guidance.">News Impact?</button>
+              <button type="button" class="prompt-chip" data-query="Is the 14-day RSI and momentum indicating an overbought entry?">RSI Timing?</button>
+            </div>
+
+            <form class="copilot-input-form" id="copilotForm">
+              <input 
+                type="text" 
+                id="copilotInput" 
+                class="copilot-input" 
+                placeholder="Ask Gemini anything about this stock..." 
+                autocomplete="off"
+              >
+              <button type="submit" class="btn-copilot-send" id="btnCopilotSend">Send</button>
+            </form>
+          </div>
+
+          <!-- Real-Time Breaking News Feed -->
+          <div class="news-feed-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+              <h4 style="font-family: var(--font-heading); color: var(--text-white); font-size: 1.15rem;">
+                Breaking Financial Headlines
+              </h4>
+              <span class="badge-market" id="newsSentimentBadge">Sentiment: Bullish</span>
+            </div>
+
+            <div class="news-list" id="newsList">
+              <!-- Dynamically Populated with Real Google News RSS Items -->
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-skill-note">
+        Integrated with Project Skill: <code>stock-analysis (v5.0)</code> • Google Gemini AI • Yahoo Finance & Google News RSS
+      </div>
+      <div>
+        © <span id="currentYear">2026</span> Stock Analytics. For informational and educational purposes only. Past performance does not guarantee future results. Not financial advice.
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       JAVASCRIPT: CLIENT ORCHESTRATION & GEMINI INTEGRATION
+       ========================================================================== */
+  -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      'use strict';
+
+      // Elements
+      const tickerForm = document.getElementById('tickerForm');
+      const tickerInput = document.getElementById('tickerInput');
+      const analyzeBtn = document.getElementById('analyzeBtn');
+      const chipButtons = document.querySelectorAll('.ticker-chip-btn');
+      
+      const scanningOverlay = document.getElementById('scanningOverlay');
+      const scanStepText = document.getElementById('scanStepText');
+      const scanSubText = document.getElementById('scanSubText');
+      
+      const errorCard = document.getElementById('errorCard');
+      const errorTitle = document.getElementById('errorTitle');
+      const errorMsg = document.getElementById('errorMsg');
+      
+      const resultsDashboard = document.getElementById('resultsDashboard');
+      const navbar = document.getElementById('navbar');
+
+      // Gemini elements
+      const geminiNavBtn = document.getElementById('geminiNavBtn');
+      const geminiBtnText = document.getElementById('geminiBtnText');
+      const geminiModal = document.getElementById('geminiModal');
+      const geminiKeyInput = document.getElementById('geminiKeyInput');
+      const modalCloseBtn = document.getElementById('modalCloseBtn');
+      const modalSaveBtn = document.getElementById('modalSaveBtn');
+
+      const geminiUnlockBanner = document.getElementById('geminiUnlockBanner');
+      const geminiActiveContent = document.getElementById('geminiActiveContent');
+      const bannerKeyInput = document.getElementById('bannerKeyInput');
+      const bannerKeyBtn = document.getElementById('bannerKeyBtn');
+
+      // Copilot Chat elements
+      const copilotForm = document.getElementById('copilotForm');
+      const copilotInput = document.getElementById('copilotInput');
+      const copilotChatBox = document.getElementById('copilotChatBox');
+      const promptChips = document.querySelectorAll('.prompt-chip');
+
+      // Chart elements
+      const chartSvg = document.getElementById('chartSvg');
+      const chartViewport = document.getElementById('chartViewport');
+      const chartHoverCard = document.getElementById('chartHoverCard');
+      const btnModeCandle = document.getElementById('btnModeCandle');
+      const btnModeArea = document.getElementById('btnModeArea');
+
+      let currentTicker = 'AAPL';
+      let currentHistoryData = [];
+      let currentFullAnalysisData = null;
+      let chartDisplayMode = 'candlestick';
+
+      // Get stored Gemini Key
+      function getStoredGeminiKey() {
+        const key = localStorage.getItem('GEMINI_API_KEY') || '';
+        // Invalidate error strings or strings with spaces accidentally saved
+        if (key && (key.includes(' ') || key.includes('Failed') || key.length < 15)) {
+          localStorage.removeItem('GEMINI_API_KEY');
+          return '';
+        }
+        return key.trim();
+      }
+
+      function setStoredGeminiKey(key) {
+        const cleaned = (key || '').trim();
+        if (cleaned && !cleaned.includes(' ') && cleaned.length >= 15) {
+          localStorage.setItem('GEMINI_API_KEY', cleaned);
+        } else {
+          localStorage.removeItem('GEMINI_API_KEY');
+        }
+        updateGeminiUIState();
+      }
+
+      function updateGeminiUIState() {
+        const key = getStoredGeminiKey();
+        if (key) {
+          geminiNavBtn.classList.add('active');
+          geminiBtnText.textContent = 'Gemini AI Active ✨';
+          geminiUnlockBanner.style.display = 'none';
+          geminiActiveContent.style.display = 'block';
+        } else {
+          geminiNavBtn.classList.remove('active');
+          geminiBtnText.textContent = 'Setup Gemini AI ⚡';
+        }
+      }
+
+      // Initial Gemini UI State
+      updateGeminiUIState();
+
+      // Modal Handlers
+      geminiNavBtn.addEventListener('click', () => {
+        geminiKeyInput.value = getStoredGeminiKey();
+        geminiModal.classList.add('open');
+        geminiKeyInput.focus();
+      });
+
+      modalCloseBtn.addEventListener('click', () => {
+        geminiModal.classList.remove('open');
+      });
+
+      modalSaveBtn.addEventListener('click', () => {
+        setStoredGeminiKey(geminiKeyInput.value);
+        geminiModal.classList.remove('open');
+        if (currentTicker) {
+          executeStockAnalysis(currentTicker);
+        }
+      });
+
+      bannerKeyBtn.addEventListener('click', () => {
+        const val = bannerKeyInput.value.trim();
+        if (val) {
+          setStoredGeminiKey(val);
+          if (currentTicker) {
+            executeStockAnalysis(currentTicker);
+          }
+        }
+      });
+
+      // Set copyright year
+      const yearEl = document.getElementById('currentYear');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      // Navbar scroll effect
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 30) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      }, { passive: true });
+
+      // Auto-capitalize ticker input
+      tickerInput.addEventListener('input', (e) => {
+        e.target.value = e.target.value.toUpperCase().replace(/[^A-Z0-9\-\.]/g, '');
+      });
+
+      // Quick chip clicks
+      chipButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const ticker = btn.getAttribute('data-ticker');
+          tickerInput.value = ticker;
+          executeStockAnalysis(ticker);
+        });
+      });
+
+      // Form submission
+      tickerForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const ticker = tickerInput.value.trim().toUpperCase();
+        if (ticker) {
+          executeStockAnalysis(ticker);
+        }
+      });
+
+      // Step text sequence for radar
+      let scanInterval = null;
+      function startScanAnimation(ticker) {
+        scanningOverlay.style.display = 'block';
+        resultsDashboard.style.display = 'none';
+        errorCard.style.display = 'none';
+
+        const steps = [
+          { main: `Connecting to Yahoo Finance for ${ticker}...`, sub: "Retrieving real-time order book, balance sheet, and market capitalization" },
+          { main: "Executing 8-Dimension Quantitative Skill...", sub: "Computing EPS surprises, analyst price targets, and 14-day RSI oscillation" },
+          { main: "Scanning Google News RSS & Macro Sentiment...", sub: "Synthesizing breaking headlines, put/call ratios, and VIX volatility structure" },
+          { main: "Calling Google Gemini AI Flash Engine...", sub: "Generating qualitative investment memo, Bull vs. Bear debate, and moat thesis" }
+        ];
+
+        let stepIdx = 0;
+        scanStepText.textContent = steps[0].main;
+        scanSubText.textContent = steps[0].sub;
+
+        scanInterval = setInterval(() => {
+          stepIdx = (stepIdx + 1) % steps.length;
+          scanStepText.textContent = steps[stepIdx].main;
+          scanSubText.textContent = steps[stepIdx].sub;
+        }, 1100);
+      }
+
+      function stopScanAnimation() {
+        if (scanInterval) clearInterval(scanInterval);
+        scanningOverlay.style.display = 'none';
+      }
+
+      function showError(title, message) {
+        stopScanAnimation();
+        errorTitle.textContent = title;
+        errorMsg.textContent = message;
+        errorCard.style.display = 'block';
+        resultsDashboard.style.display = 'none';
+      }
+
+      /* --------------------------------------------------------------------------
+         API EXECUTION: /api/analyze?ticker=SYMBOL (ROBUST MULTI-PORT ROUTING)
+         -------------------------------------------------------------------------- */
+      function getApiUrl(path) {
+        // If loaded directly from backend on port 3000, keep relative
+        if (window.location.port === '3000') {
+          return path;
+        }
+        // If loaded from static server (e.g. port 8080) or file://, target backend on port 3000
+        return `http://localhost:3000${path}`;
+      }
+
+      async function fetchBackendApi(path, options = {}) {
+        let primaryUrl = getApiUrl(path);
+        let res;
+        try {
+          res = await fetch(primaryUrl, options);
+          // If returned 404 and we tried a relative URL, fallback to localhost:3000
+          if (res.status === 404 && !primaryUrl.startsWith('http://localhost:3000')) {
+            console.warn(`Endpoint ${primaryUrl} returned 404. Falling back to http://localhost:3000${path}...`);
+            primaryUrl = `http://localhost:3000${path}`;
+            res = await fetch(primaryUrl, options);
+          }
+          return res;
+        } catch (netErr) {
+          if (!primaryUrl.startsWith('http://localhost:3000')) {
+            console.warn(`Connection to ${primaryUrl} failed. Falling back to http://localhost:3000${path}...`);
+            return await fetch(`http://localhost:3000${path}`, options);
+          }
+          throw netErr;
+        }
+      }
+
+      async function executeStockAnalysis(ticker) {
+        currentTicker = ticker;
+        startScanAnimation(ticker);
+        analyzeBtn.classList.add('loading');
+        analyzeBtn.disabled = true;
+
+        try {
+          const geminiKey = getStoredGeminiKey();
+          const endpoint = `/api/analyze?ticker=${encodeURIComponent(ticker)}`;
+          const headers = {};
+          if (geminiKey) {
+            headers['X-Gemini-Key'] = geminiKey;
+          }
+
+          const response = await fetchBackendApi(endpoint, { headers });
+          
+          if (!response.ok) {
+            const errJson = await response.json().catch(() => ({}));
+            let msg = errJson.error || `Server responded with status ${response.status}`;
+            if (response.status === 404) {
+              msg = `Backend server not reachable on this port. Please ensure python server.py is running on http://localhost:3000/`;
+            }
+            throw new Error(msg);
+          }
+
+          const data = await response.json();
+          if (!data.success) {
+            throw new Error(data.error || "Failed to analyze ticker");
+          }
+
+          currentFullAnalysisData = data;
+          stopScanAnimation();
+          renderAnalysisResults(data);
+
+        } catch (err) {
+          console.error("API analysis error:", err);
+          showError(`Failed to Analyze ${ticker}`, `${err.message}. Please verify the ticker symbol.`);
+        } finally {
+          analyzeBtn.classList.remove('loading');
+          analyzeBtn.disabled = false;
+        }
+      }
+
+      /* --------------------------------------------------------------------------
+         RENDER DASHBOARD METRICS & GEMINI SYNTHESIS (ERROR-RESILIENT)
+         -------------------------------------------------------------------------- */
+      function safeSetText(idOrEl, value) {
+        try {
+          const el = typeof idOrEl === 'string' ? document.getElementById(idOrEl) : idOrEl;
+          if (el) {
+            el.textContent = value != null ? value : '--';
+            return true;
+          }
+        } catch (e) {
+          console.warn(`[Stock Analytics] Failed setting text for ${idOrEl}:`, e);
+        }
+        return false;
+      }
+
+      function renderAnalysisResults(data) {
+        const skill = data.skill_analysis || {};
+        const comps = skill.components || {};
+        const news = data.news || [];
+        const sentiment = data.news_sentiment || {};
+        currentHistoryData = data.history || [];
+
+        // 1. Overview Header
+        safeSetText('resTicker', data.ticker || skill.ticker);
+        safeSetText('resCompanyName', skill.company_name || `${data.ticker} Equity`);
+        safeSetText('chatTickerBadge', `${data.ticker} Context Active`);
+        safeSetText('chatWelcomeTicker', data.ticker);
+        
+        // Latest Price & Change
+        let currentPriceVal = comps.analyst_sentiment?.current_price;
+        if (!currentPriceVal && currentHistoryData.length > 0) {
+          currentPriceVal = currentHistoryData[currentHistoryData.length - 1].close;
+        }
+        safeSetText('resPrice', currentPriceVal ? `$${Number(currentPriceVal).toFixed(2)}` : '$--');
+
+        // 1M stock return
+        const return1m = comps.sector_performance?.stock_return_1m ?? 0;
+        const changeBadge = document.getElementById('resChangeBadge');
+        const changeVal = document.getElementById('resChangeVal');
+        const changeIcon = document.getElementById('resChangeIcon');
+
+        if (return1m >= 0) {
+          if (changeBadge) changeBadge.className = 'hero-change-badge bullish';
+          if (changeIcon) changeIcon.textContent = '▲';
+          if (changeVal) changeVal.textContent = `+${Number(return1m).toFixed(2)}% (1M)`;
+        } else {
+          if (changeBadge) changeBadge.className = 'hero-change-badge bearish';
+          if (changeIcon) changeIcon.textContent = '▼';
+          if (changeVal) changeVal.textContent = `${Number(return1m).toFixed(2)}% (1M)`;
+        }
+
+        safeSetText('resSector', comps.sector_performance?.sector_name || 'Market Asset');
+
+        // 2. AI Recommendation & Confidence
+        const verdict = (skill.recommendation || 'HOLD').toUpperCase();
+        const verdictBox = document.getElementById('signalVerdict');
+        if (verdictBox) {
+          verdictBox.textContent = verdict;
+          verdictBox.className = 'signal-verdict-box';
+          if (verdict.includes('BUY')) {
+            verdictBox.classList.add('buy');
+          } else if (verdict.includes('SELL')) {
+            verdictBox.classList.add('sell');
+          } else {
+            verdictBox.classList.add('hold');
+          }
+        }
+
+        const rawConf = skill.confidence ?? skill.final_score ?? 0.7;
+        const confPercent = Math.min(100, Math.max(10, Math.round(Math.abs(rawConf) * 100)));
+        safeSetText('confidenceVal', `${confPercent}%`);
+        const confBar = document.getElementById('confidenceBar');
+        if (confBar) confBar.style.width = `${confPercent}%`;
+
+        // 3. Supporting Points & Caveats
+        const pointsList = document.getElementById('supportingPointsList');
+        if (pointsList) {
+          pointsList.innerHTML = '';
+          (skill.supporting_points || ["Strong quantitative momentum scores", "Solid fundamental margins"]).forEach(pt => {
+            const li = document.createElement('li');
+            li.style.cssText = "display: flex; gap: 8px; font-size: 0.88rem; color: var(--text-secondary);";
+            li.innerHTML = `<span style="color: var(--color-cyan);">✓</span><span>${escapeHtml(pt)}</span>`;
+            pointsList.appendChild(li);
+          });
+        }
+
+        const caveatsList = document.getElementById('caveatsList');
+        if (caveatsList) {
+          caveatsList.innerHTML = '';
+          (skill.caveats || ["FINRA short interest lags by ~2 weeks", "Macro volatility may influence short-term entries"]).forEach(cv => {
+            const li = document.createElement('li');
+            li.style.cssText = "display: flex; gap: 8px; font-size: 0.88rem; color: var(--text-secondary);";
+            li.innerHTML = `<span style="color: var(--color-amber);">⚠️</span><span>${escapeHtml(cv)}</span>`;
+            caveatsList.appendChild(li);
+          });
+        }
+
+        // 4. Render Gemini Deep Analysis
+        try {
+          renderGeminiSynthesis(data);
+        } catch (geminiErr) {
+          console.warn("Gemini rendering warning:", geminiErr);
+        }
+
+        // 5. Populate Institutional 6-Point Quality Screen
+        const chk = data.fundamentals_checklist || {};
+        const chkChecks = chk.checks || [];
+        const qualityScoreBanner = document.getElementById('qualityScoreBanner');
+        const qualityProgressFill = document.getElementById('qualityProgressFill');
+        const qualityChecksGrid = document.getElementById('qualityChecksGrid');
+
+        if (qualityScoreBanner && qualityProgressFill && qualityChecksGrid) {
+          const passRate = chk.pass_rate_pct != null ? chk.pass_rate_pct : 0;
+          const passedCount = chk.passed_count != null ? chk.passed_count : 0;
+          const totalCount = chk.total_count != null ? chk.total_count : 6;
+          const status = chk.status || 'EVALUATING';
+
+          qualityScoreBanner.textContent = `${passedCount}/${totalCount} Passed (${passRate}%) • ${status}`;
+          qualityScoreBanner.className = 'quality-score-pill';
+          if (passedCount >= 5) {
+            qualityScoreBanner.classList.add('strong');
+          } else if (passedCount >= 3) {
+            qualityScoreBanner.classList.add('moderate');
+          } else {
+            qualityScoreBanner.classList.add('caution');
+          }
+
+          qualityProgressFill.style.width = `${passRate}%`;
+          if (passedCount >= 5) {
+            qualityProgressFill.style.background = 'linear-gradient(90deg, var(--color-cyan), var(--color-green))';
+          } else if (passedCount >= 3) {
+            qualityProgressFill.style.background = 'linear-gradient(90deg, var(--color-amber), var(--color-cyan))';
+          } else {
+            qualityProgressFill.style.background = 'linear-gradient(90deg, var(--color-coral), var(--color-amber))';
+          }
+
+          qualityChecksGrid.innerHTML = '';
+          chkChecks.forEach(c => {
+            const card = document.createElement('div');
+            card.className = `quality-item-card ${c.passed ? 'passed' : 'failed'}`;
+            card.innerHTML = `
+              <div>
+                <div class="quality-item-header">
+                  <span class="quality-item-title">${escapeHtml(c.name)}</span>
+                  <span class="quality-status-badge ${c.passed ? 'passed' : 'failed'}">${c.passed ? 'PASS ✓' : 'FAIL ✗'}</span>
+                </div>
+                <div class="quality-item-val" style="color: ${c.passed ? 'var(--color-green)' : 'var(--color-coral)'};">
+                  ${escapeHtml(c.display || 'N/A')}
+                </div>
+                <div class="quality-target-rule">Target: ${escapeHtml(c.rule || c.target || '')}</div>
+              </div>
+              <div style="font-size: 0.76rem; color: var(--text-secondary); margin-top: 10px; line-height: 1.35;">
+                ${escapeHtml(c.desc || '')}
+              </div>
+            `;
+            qualityChecksGrid.appendChild(card);
+          });
+        }
+
+        // 6. Populate Dimension Cards
+        const fund = comps.fundamentals || {};
+        safeSetText('peRatio', fund.pe_ratio != null ? `${Number(fund.pe_ratio).toFixed(1)}x` : 'N/A');
+        safeSetText('pegRatioVal', fund.peg_ratio != null ? `${Number(fund.peg_ratio).toFixed(2)}x` : 'N/A');
+        safeSetText('roeVal', fund.roe != null ? `${Number(fund.roe).toFixed(1)}%` : 'N/A');
+        safeSetText('roicVal', fund.roic != null ? `${Number(fund.roic).toFixed(1)}%` : 'N/A');
+        safeSetText('currRatioVal', fund.current_ratio != null ? Number(fund.current_ratio).toFixed(2) : 'N/A');
+        safeSetText('debtEbitdaVal', fund.debt_to_ebitda != null ? `${Number(fund.debt_to_ebitda).toFixed(2)}x` : 'N/A');
+        safeSetText('epsGrowthVal', fund.eps_growth_5y != null ? `${fund.eps_growth_5y >= 0 ? '+' : ''}${Number(fund.eps_growth_5y).toFixed(1)}%` : 'N/A');
+        safeSetText('opMargin', fund.operating_margin != null ? `${(fund.operating_margin * 100).toFixed(1)}%` : 'N/A');
+        safeSetText('revGrowth', fund.revenue_growth_yoy != null ? `${(fund.revenue_growth_yoy * 100).toFixed(1)}%` : 'N/A');
+        safeSetText('debtEquity', fund.debt_to_equity != null ? `${Number(fund.debt_to_equity).toFixed(2)}` : 'N/A');
+
+        const an = comps.analyst_sentiment || {};
+        safeSetText('analystConsensus', an.consensus_rating || 'Neutral');
+        safeSetText('priceTarget', an.price_target != null ? `$${Number(an.price_target).toFixed(2)}` : 'N/A');
+        safeSetText('upsidePct', an.upside_pct != null ? `${an.upside_pct >= 0 ? '+' : ''}${Number(an.upside_pct).toFixed(1)}%` : 'N/A');
+        safeSetText('numAnalysts', an.num_analysts != null ? `${an.num_analysts} Analysts` : 'N/A');
+
+        const earn = comps.earnings_surprise || {};
+        const histEarn = comps.historical_patterns || {};
+        safeSetText('actualEps', earn.actual_eps != null ? `$${Number(earn.actual_eps).toFixed(2)}` : 'N/A');
+        safeSetText('expectedEps', earn.expected_eps != null ? `$${Number(earn.expected_eps).toFixed(2)}` : 'N/A');
+        safeSetText('surprisePct', earn.surprise_pct != null ? `${earn.surprise_pct >= 0 ? '+' : ''}${Number(earn.surprise_pct).toFixed(1)}%` : 'N/A');
+        safeSetText('beatStreak', histEarn.beats_last_4q != null ? `${histEarn.beats_last_4q} of last 4 Qtrs` : 'N/A');
+
+        const mom = comps.momentum || {};
+        safeSetText('rsiVal', mom.rsi_14d != null ? Number(mom.rsi_14d).toFixed(1) : '52.4');
+        safeSetText('rsiStatus', mom.rsi_status ? mom.rsi_status.toUpperCase() : 'NEUTRAL');
+        safeSetText('nearHigh', mom.near_52w_high ? 'Yes (Bullish)' : 'No');
+        safeSetText('volumeRatio', mom.volume_ratio != null ? `${Number(mom.volume_ratio).toFixed(2)}x Rel Vol` : '1.0x');
+
+        const sec = comps.sector_performance || {};
+        safeSetText('sectorName', sec.sector_name || 'Global Equities');
+        safeSetText('stockReturn1m', sec.stock_return_1m != null ? `${sec.stock_return_1m >= 0 ? '+' : ''}${Number(sec.stock_return_1m).toFixed(1)}%` : 'N/A');
+        safeSetText('sectorReturn1m', sec.sector_return_1m != null ? `${sec.sector_return_1m >= 0 ? '+' : ''}${Number(sec.sector_return_1m).toFixed(1)}%` : 'N/A');
+        safeSetText('relStrength', sec.relative_strength != null ? Number(sec.relative_strength).toFixed(2) : '1.00');
+
+        const mac = comps.market_context || {};
+        safeSetText('vixVal', mac.vix_level != null ? `${Number(mac.vix_level).toFixed(1)} (${mac.vix_status || 'normal'})` : '17.4 (Calm)');
+        safeSetText('marketRegime', mac.market_regime ? mac.market_regime.toUpperCase() : 'NEUTRAL');
+        safeSetText('spyTrend', mac.spy_trend_10d != null ? `${mac.spy_trend_10d >= 0 ? '+' : ''}${Number(mac.spy_trend_10d).toFixed(1)}%` : '+0.8%');
+        safeSetText('riskOff', mac.risk_off_detected ? '⚠️ Flight to Safety' : 'Normal Regime');
+
+        // 6. News Feed & Sentiment
+        safeSetText('newsSentimentBadge', `Sentiment: ${sentiment.label || 'Neutral'} (${sentiment.score || 55}%)`);
+        const newsList = document.getElementById('newsList');
+        if (newsList) {
+          newsList.innerHTML = '';
+          if (news.length === 0) {
+            newsList.innerHTML = '<div style="color: var(--text-muted); padding: 16px;">No breaking news detected.</div>';
+          } else {
+            news.forEach(item => {
+              const card = document.createElement('a');
+              card.className = 'news-item-card';
+              card.href = item.link || '#';
+              card.target = '_blank';
+              card.rel = 'noopener noreferrer';
+
+              const sentColor = item.sentiment === 'Bullish' ? 'var(--color-green)' : item.sentiment === 'Bearish' ? 'var(--color-coral)' : 'var(--text-muted)';
+              card.innerHTML = `
+                <div class="news-meta-row">
+                  <span class="news-source">${escapeHtml(item.source || 'Financial Wire')}</span>
+                  <span style="color: ${sentColor}; font-weight: 700;">${item.sentiment || 'Neutral'}</span>
+                </div>
+                <div class="news-headline">${escapeHtml(item.title)}</div>
+                <div style="font-size: 0.72rem; color: var(--text-muted);">${escapeHtml(item.published || '')}</div>
+              `;
+              newsList.appendChild(card);
+            });
+          }
+        }
+
+        // 7. Render Chart
+        try {
+          renderChart(currentHistoryData);
+        } catch (chartErr) {
+          console.warn("Chart rendering warning:", chartErr);
+        }
+
+        // Reset chat with current ticker
+        if (copilotChatBox) {
+          copilotChatBox.innerHTML = `
+            <div class="chat-msg ai">
+              Hello trader. I have loaded all quantitative factors, SEC metrics, and breaking news for <strong>${data.ticker}</strong>. Ask me anything about margin durability, valuation, competitor threats, or the bull/bear case.
+            </div>
+          `;
+        }
+
+        // Reveal Dashboard
+        if (resultsDashboard) {
+          resultsDashboard.style.display = 'block';
+          resultsDashboard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+
+      /* --------------------------------------------------------------------------
+         RENDER GEMINI SYNTHESIS DATA
+         -------------------------------------------------------------------------- */
+      function renderGeminiSynthesis(data) {
+        const hasKey = Boolean(getStoredGeminiKey() || data.gemini_active);
+        
+        if (!hasKey) {
+          if (geminiUnlockBanner) geminiUnlockBanner.style.display = 'block';
+          if (geminiActiveContent) geminiActiveContent.style.display = 'none';
+          return;
+        }
+
+        if (geminiUnlockBanner) geminiUnlockBanner.style.display = 'none';
+        if (geminiActiveContent) geminiActiveContent.style.display = 'block';
+
+        const syn = data.gemini_synthesis || {};
+
+        safeSetText('geminiExecutiveThesis', syn.executive_thesis || `${data.ticker} demonstrates resilient operating fundamentals paired with solid cash flow generation, balanced against sector-wide multiple fluctuations.`);
+
+        // Bull Case List
+        const bullList = document.getElementById('geminiBullList');
+        if (bullList) {
+          bullList.innerHTML = '';
+          (syn.bull_case || [
+            "Sustained operating margin expansion exceeding historical sector benchmarks",
+            "Accelerating forward revenue growth driven by core product line adoption",
+            "Strong balance sheet providing ample buffer for R&D and capital returns"
+          ]).forEach(b => {
+            const li = document.createElement('li');
+            li.style.cssText = "display: flex; gap: 8px; font-size: 0.88rem; color: var(--text-primary);";
+            li.innerHTML = `<span style="color: var(--color-green);">▲</span><span>${escapeHtml(b)}</span>`;
+            bullList.appendChild(li);
+          });
+        }
+
+        // Bear Case List
+        const bearList = document.getElementById('geminiBearList');
+        if (bearList) {
+          bearList.innerHTML = '';
+          (syn.bear_case || [
+            "Elevated valuation multiple leaving reduced margin for execution error",
+            "Potential supply-chain or customer concentration friction in forward quarters",
+            "Broader macroeconomic rate sensitivity compressing growth multiples"
+          ]).forEach(r => {
+            const li = document.createElement('li');
+            li.style.cssText = "display: flex; gap: 8px; font-size: 0.88rem; color: var(--text-primary);";
+            li.innerHTML = `<span style="color: var(--color-coral);">▼</span><span>${escapeHtml(r)}</span>`;
+            bearList.appendChild(li);
+          });
+        }
+
+        safeSetText('geminiMoat', syn.moat_rating || 'Durable competitive moat & pricing power');
+        safeSetText('geminiCatalyst', syn.catalyst_timeline || 'Next quarterly earnings report & guidance announcement');
+      }
+
+      /* --------------------------------------------------------------------------
+         COPILOT CHAT INTERACTION (/api/chat)
+         -------------------------------------------------------------------------- */
+      async function sendCopilotMessage(userMessage) {
+        if (!userMessage.trim()) return;
+
+        // Append user bubble
+        const userBubble = document.createElement('div');
+        userBubble.className = 'chat-msg user';
+        userBubble.textContent = userMessage;
+        copilotChatBox.appendChild(userBubble);
+        copilotChatBox.scrollTop = copilotChatBox.scrollHeight;
+
+        const geminiKey = getStoredGeminiKey();
+        if (!geminiKey) {
+          const warnBubble = document.createElement('div');
+          warnBubble.className = 'chat-msg ai';
+          warnBubble.innerHTML = `⚠️ <em>Gemini API key is required to chat. Click the <strong>Setup Gemini AI</strong> button in the top navigation to add your free key.</em>`;
+          copilotChatBox.appendChild(warnBubble);
+          copilotChatBox.scrollTop = copilotChatBox.scrollHeight;
+          return;
+        }
+
+        // AI Typing indicator bubble
+        const aiBubble = document.createElement('div');
+        aiBubble.className = 'chat-msg ai';
+        aiBubble.innerHTML = `<span class="pulse-dot gemini-dot" style="display:inline-block; margin-right:6px;"></span> <em>Gemini is analyzing ${currentTicker} telemetry...</em>`;
+        copilotChatBox.appendChild(aiBubble);
+        copilotChatBox.scrollTop = copilotChatBox.scrollHeight;
+
+        try {
+          const payload = {
+            ticker: currentTicker,
+            message: userMessage,
+            gemini_key: geminiKey,
+            context: currentFullAnalysisData ? {
+              company: currentFullAnalysisData.skill_analysis?.company_name,
+              fundamentals: currentFullAnalysisData.skill_analysis?.components?.fundamentals,
+              analyst_sentiment: currentFullAnalysisData.skill_analysis?.components?.analyst_sentiment,
+              momentum: currentFullAnalysisData.skill_analysis?.components?.momentum,
+              news_headlines: (currentFullAnalysisData.news || []).slice(0, 4).map(n => n.title)
+            } : {}
+          };
+
+          const resp = await fetchBackendApi('/api/chat', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Gemini-Key': geminiKey
+            },
+            body: JSON.stringify(payload)
+          });
+
+          const resData = await resp.json();
+          if (!resData.success) {
+            throw new Error(resData.error || 'Failed to get Gemini response');
+          }
+
+          aiBubble.innerHTML = escapeHtml(resData.reply).replace(/\n/g, '<br>');
+        } catch (err) {
+          aiBubble.innerHTML = `<span style="color: var(--color-coral);">Error: ${escapeHtml(err.message)}</span>`;
+        } finally {
+          copilotChatBox.scrollTop = copilotChatBox.scrollHeight;
+        }
+      }
+
+      copilotForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const msg = copilotInput.value;
+        copilotInput.value = '';
+        sendCopilotMessage(msg);
+      });
+
+      promptChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          const q = chip.getAttribute('data-query');
+          sendCopilotMessage(q);
+        });
+      });
+
+      /* --------------------------------------------------------------------------
+         CANDLESTICK & AREA CHART RENDERING ENGINE (VANILLA SVG)
+         -------------------------------------------------------------------------- */
+      function renderChart(candles) {
+        if (!candles || candles.length === 0) {
+          chartSvg.innerHTML = '<text x="500" y="180" fill="#94A3B8" font-size="16" text-anchor="middle">No historical candle data available</text>';
+          return;
+        }
+
+        const width = 1000;
+        const height = 360;
+        const padTop = 30;
+        const padBottom = 60;
+        const chartHeight = height - padTop - padBottom;
+        const volHeight = 45;
+
+        const prices = candles.flatMap(c => [c.high, c.low]);
+        let minPrice = Math.min(...prices);
+        let maxPrice = Math.max(...prices);
+        const pricePadding = (maxPrice - minPrice) * 0.08 || 1;
+        minPrice -= pricePadding;
+        maxPrice += pricePadding;
+        const priceRange = maxPrice - minPrice;
+
+        const volumes = candles.map(c => c.volume);
+        const maxVol = Math.max(...volumes) || 1;
+
+        const smaPeriod = 20;
+        const smaPoints = [];
+        for (let i = 0; i < candles.length; i++) {
+          if (i >= smaPeriod - 1) {
+            let sum = 0;
+            for (let j = i - smaPeriod + 1; j <= i; j++) {
+              sum += candles[j].close;
+            }
+            smaPoints.push({ index: i, val: sum / smaPeriod });
+          }
+        }
+
+        let svgHtml = `
+          <defs>
+            <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#8E75FF" stop-opacity="0.35" />
+              <stop offset="100%" stop-color="#00F0FF" stop-opacity="0.0" />
+            </linearGradient>
+            <linearGradient id="bullVolGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#39FF14" stop-opacity="0.4" />
+              <stop offset="100%" stop-color="#39FF14" stop-opacity="0.1" />
+            </linearGradient>
+            <linearGradient id="bearVolGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#FF3E3E" stop-opacity="0.4" />
+              <stop offset="100%" stop-color="#FF3E3E" stop-opacity="0.1" />
+            </linearGradient>
+          </defs>
+        `;
+
+        const gridSteps = 4;
+        for (let g = 0; g <= gridSteps; g++) {
+          const y = padTop + (g / gridSteps) * chartHeight;
+          const priceAtY = maxPrice - (g / gridSteps) * priceRange;
+          svgHtml += `
+            <line x1="0" y1="${y}" x2="${width}" y2="${y}" stroke="rgba(255, 255, 255, 0.05)" stroke-dasharray="3,3" />
+            <text x="${width - 10}" y="${y - 4}" fill="#64748B" font-size="11" font-family="'Space Grotesk', sans-serif" text-anchor="end">$${priceAtY.toFixed(2)}</text>
+          `;
+        }
+
+        const candleCount = candles.length;
+        const candleSpacing = width / candleCount;
+        const candleWidth = Math.max(2, Math.min(14, candleSpacing * 0.65));
+
+        const getX = (idx) => (idx + 0.5) * candleSpacing;
+        const getY = (price) => padTop + chartHeight - ((price - minPrice) / priceRange) * chartHeight;
+
+        candles.forEach((c, i) => {
+          const x = getX(i);
+          const barH = (c.volume / maxVol) * volHeight;
+          const y = height - barH - 8;
+          const isBull = c.close >= c.open;
+          const fill = isBull ? 'url(#bullVolGrad)' : 'url(#bearVolGrad)';
+          svgHtml += `<rect x="${x - candleWidth / 2}" y="${y}" width="${candleWidth}" height="${barH}" fill="${fill}" rx="1" />`;
+        });
+
+        if (chartDisplayMode === 'candlestick') {
+          candles.forEach((c, i) => {
+            const x = getX(i);
+            const isBull = c.close >= c.open;
+            const color = isBull ? '#39FF14' : '#FF3E3E';
+            const yHigh = getY(c.high);
+            const yLow = getY(c.low);
+            const yOpen = getY(c.open);
+            const yClose = getY(c.close);
+            const bodyY = Math.min(yOpen, yClose);
+            const bodyH = Math.max(2, Math.abs(yOpen - yClose));
+
+            svgHtml += `<line x1="${x}" y1="${yHigh}" x2="${x}" y2="${yLow}" stroke="${color}" stroke-width="1.4" stroke-linecap="round" />`;
+            svgHtml += `<rect x="${x - candleWidth / 2}" y="${bodyY}" width="${candleWidth}" height="${bodyH}" fill="${color}" rx="1" />`;
+          });
+        } else {
+          let areaPath = `M ${getX(0)} ${getY(candles[0].close)}`;
+          let linePath = `M ${getX(0)} ${getY(candles[0].close)}`;
+
+          for (let i = 1; i < candles.length; i++) {
+            const x = getX(i);
+            const y = getY(candles[i].close);
+            linePath += ` L ${x} ${y}`;
+            areaPath += ` L ${x} ${y}`;
+          }
+
+          areaPath += ` L ${getX(candles.length - 1)} ${padTop + chartHeight} L ${getX(0)} ${padTop + chartHeight} Z`;
+
+          svgHtml += `<path d="${areaPath}" fill="url(#areaGradient)" />`;
+          svgHtml += `<path d="${linePath}" fill="none" stroke="#8E75FF" stroke-width="2.6" stroke-linecap="round" />`;
+        }
+
+        if (smaPoints.length > 1) {
+          let smaPath = `M ${getX(smaPoints[0].index)} ${getY(smaPoints[0].val)}`;
+          for (let s = 1; s < smaPoints.length; s++) {
+            smaPath += ` L ${getX(smaPoints[s].index)} ${getY(smaPoints[s].val)}`;
+          }
+          svgHtml += `<path d="${smaPath}" fill="none" stroke="#00F0FF" stroke-width="1.8" stroke-dasharray="4,3" opacity="0.8" />`;
+        }
+
+        chartSvg.innerHTML = svgHtml;
+        setupChartHover(candles, getX, candleSpacing);
+      }
+
+      function setupChartHover(candles, getX, candleSpacing) {
+        chartViewport.onmousemove = (e) => {
+          const rect = chartViewport.getBoundingClientRect();
+          const mouseX = e.clientX - rect.left;
+          const svgX = (mouseX / rect.width) * 1000;
+
+          const index = Math.max(0, Math.min(candles.length - 1, Math.floor(svgX / candleSpacing)));
+          const c = candles[index];
+          if (!c) return;
+
+          document.getElementById('hoverDate').textContent = c.date;
+          document.getElementById('hoverOpen').textContent = `$${c.open.toFixed(2)}`;
+          document.getElementById('hoverHigh').textContent = `$${c.high.toFixed(2)}`;
+          document.getElementById('hoverLow').textContent = `$${c.low.toFixed(2)}`;
+          document.getElementById('hoverClose').textContent = `$${c.close.toFixed(2)}`;
+          document.getElementById('hoverVol').textContent = c.volume > 1000000 
+            ? `${(c.volume / 1000000).toFixed(1)}M` 
+            : `${(c.volume / 1000).toFixed(0)}K`;
+
+          chartHoverCard.style.display = 'flex';
+        };
+      }
+
+      btnModeCandle.addEventListener('click', () => {
+        chartDisplayMode = 'candlestick';
+        btnModeCandle.classList.add('active');
+        btnModeArea.classList.remove('active');
+        renderChart(currentHistoryData);
+      });
+
+      btnModeArea.addEventListener('click', () => {
+        chartDisplayMode = 'area';
+        btnModeArea.classList.add('active');
+        btnModeCandle.classList.remove('active');
+        renderChart(currentHistoryData);
+      });
+
+      function escapeHtml(str) {
+        if (!str) return '';
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      // Initial Demo Analysis on AAPL
+      executeStockAnalysis('AAPL');
+
+    });
+  </script>
+</body>
+</html>

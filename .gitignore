@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.env
+.env
+.venv
+env/
+venv/
+
+# Temp test files & logs
+nvda_response.json
+*.tmp
+*.log
+
+# System & Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

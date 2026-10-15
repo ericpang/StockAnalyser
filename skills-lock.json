@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "skills": {
+    "design-mobile-apps": {
+      "source": "designed-by-ai/skills",
+      "sourceType": "github",
+      "skillPath": "skills/design-mobile-apps/SKILL.md",
+      "computedHash": "30bfa26c39e384af50d5ca2a9da7c39e239ce822f5e3fd2a31e8e6b55d3679ac"
+    },
+    "lead-magnets": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/lead-magnets/SKILL.md",
+      "computedHash": "447a88ab80b8a4c566bcb35121a72d2dbd4dbf16038e96540aa4d029d09a3c57"
+    },
+    "seo-aeo-best-practices": {
+      "source": "sanity-io/agent-toolkit",
+      "sourceType": "github",
+      "skillPath": "skills/seo-aeo-best-practices/SKILL.md",
+      "computedHash": "b6b2dd3af3c92f82f04b830dab2cc323f299d7c2e57f7d3619a5886caa7eeb08"
+    },
+    "stock-analysis": {
+      "source": "gracefullight/stock-checker",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/stock-analysis/SKILL.md",
+      "computedHash": "a25d3fae949937b0ecb47dde7154c3682158921e3b6e2c976af60051cdf8579c"
+    }
+  }
+}
