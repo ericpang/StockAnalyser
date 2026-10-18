@@ -40,7 +40,7 @@ Automated quantitative sanity check evaluating financial strength and capital ef
 
 * **Frontend**: Vanilla HTML5, CSS3 (Futuristic Dark-Synthwave theme), and JavaScript.
 * **Backend**: Python 3 standard library (`http.server`, `urllib.request`, `json`, `socketserver`).
-* **Data Sources**: Yahoo Finance (`yfinance`), Google News RSS, and Google Gemini API (`gemini-2.5-flash`).
+* **Data Sources**: Yahoo Finance (`yfinance`), Google News RSS, and Google Gemini API (`gemini-2.0-flash`).
 * **Skills**: Installed via Agent Skill framework (`stock-analysis`).
 
 ---

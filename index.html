@@ -3,60 +3,86 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stock Analytics | AI-Powered Quantitative & Gemini Stock Intelligence</title>
-  <meta name="description" content="Instant institutional stock analysis combining Python quantitative skills, Yahoo Finance telemetry, interactive technical charts, and Google Gemini AI generative synthesis.">
-  <meta name="keywords" content="Stock Analysis, Ticker Screener, Gemini AI Stock Analysis, Quant Indicators, Market Intelligence, Candlestick Chart">
+  <title>Stock Analytics | Apple-Grade Intelligence & Quantitative Synthesis</title>
+  <meta name="description" content="Institutional-grade stock and market intelligence crafted with Apple fluid design, featuring Yahoo Finance quantitative telemetry, real-time interactive charts, and Google Gemini AI generative synthesis.">
+  <meta name="keywords" content="Stock Analysis, Ticker Screener, Apple Design, Quant Indicators, Market Intelligence, Candlestick Chart, Gemini AI">
 
-  <!-- Google Fonts: Syncopate, Space Grotesk, Inter -->
+  <!-- Apple System Font & Typography Fallbacks -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600;700&family=SF+Pro+Text:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     /* ==========================================================================
-       1. DESIGN SYSTEM & CSS VARIABLES
+       1. APPLE DESIGN SYSTEM & CSS VARIABLES
+       WWDC Fluid Interfaces & Human Interface Guidelines
        ========================================================================== */
     :root {
-      /* Theme Base Colors */
-      --color-obsidian: #0A0E17;
-      --color-obsidian-deep: #05080E;
-      --color-card-bg: rgba(14, 20, 32, 0.78);
-      --color-card-solid: #0E1522;
-      --color-card-border: rgba(255, 255, 255, 0.08);
+      /* Apple Canvas & Materials */
+      --color-canvas: #000000;
+      --color-canvas-subtle: #0B0C0E;
+      --color-surface-glass: rgba(26, 28, 34, 0.72);
+      --color-surface-glass-hover: rgba(36, 38, 46, 0.82);
+      --color-surface-elevated: rgba(32, 34, 42, 0.88);
+      --color-surface-translucent: rgba(255, 255, 255, 0.05);
 
-      /* Neon Palette */
-      --color-fuchsia: #FF007A;
-      --color-cyan: #00F0FF;
-      --color-green: #39FF14;
-      --color-coral: #FF3E3E;
-      --color-amber: #FFB800;
-      --color-gemini: #8E75FF;
+      /* Specular Borders & Glass Highlights */
+      --glass-border: 1px solid rgba(255, 255, 255, 0.09);
+      --glass-border-subtle: 1px solid rgba(255, 255, 255, 0.05);
+      --glass-border-specular: 1px solid rgba(255, 255, 255, 0.16);
+      --glass-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.14);
 
-      /* Text Colors */
-      --text-white: #FFFFFF;
-      --text-primary: #F0F4FC;
-      --text-secondary: #94A3B8;
-      --text-muted: #64748B;
+      /* Apple System Palette */
+      --sf-blue: #0A84FF;
+      --sf-blue-glow: rgba(10, 132, 255, 0.35);
+      --sf-green: #30D158;
+      --sf-green-soft: rgba(48, 209, 88, 0.15);
+      --sf-red: #FF453A;
+      --sf-red-soft: rgba(255, 69, 58, 0.15);
+      --sf-amber: #FF9F0A;
+      --sf-amber-soft: rgba(255, 159, 10, 0.15);
+      --sf-purple: #BF5AF2;
+      --sf-purple-glow: rgba(191, 90, 242, 0.35);
+      --sf-indigo: #5E5CE6;
+      --sf-teal: #64D2FF;
 
-      /* Typography */
-      --font-display: 'Syncopate', sans-serif;
-      --font-heading: 'Space Grotesk', sans-serif;
-      --font-body: 'Inter', sans-serif;
+      /* Backwards-compatible aliases for JS references */
+      --color-cyan: var(--sf-teal);
+      --color-green: var(--sf-green);
+      --color-coral: var(--sf-red);
+      --color-amber: var(--sf-amber);
+      --color-gemini: var(--sf-purple);
 
-      /* Shadows & Neon Glows */
-      --glow-cyan: 0 0 20px rgba(0, 240, 255, 0.45);
-      --glow-cyan-lg: 0 0 35px rgba(0, 240, 255, 0.7);
-      --glow-fuchsia: 0 0 20px rgba(255, 0, 122, 0.45);
-      --glow-green: 0 0 16px rgba(57, 255, 20, 0.5);
-      --glow-coral: 0 0 16px rgba(255, 62, 62, 0.5);
-      --glow-gemini: 0 0 25px rgba(142, 117, 255, 0.5);
+      /* Apple Typography Hierarchy */
+      --font-system: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", -apple-system-body, sans-serif;
+      --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif;
+      --font-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", sans-serif;
 
-      /* Transitions */
-      --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-      --transition-normal: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      /* Text Hierarchy */
+      --text-primary: #FFFFFF;
+      --text-secondary: rgba(255, 255, 255, 0.74);
+      --text-muted: rgba(255, 255, 255, 0.46);
+      --text-tertiary: rgba(255, 255, 255, 0.28);
 
-      --nav-height: 76px;
-      --container-max: 1280px;
+      /* Apple Springs & Curves */
+      --spring-critically-damped: cubic-bezier(0.16, 1, 0.3, 1);
+      --spring-bouncy: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --transition-instant: 120ms var(--spring-critically-damped);
+      --transition-smooth: 320ms var(--spring-critically-damped);
+
+      /* Structural Dimensions */
+      --nav-height: 64px;
+      --container-max: 1240px;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 26px;
+      --radius-pill: 9999px;
+
+      /* Shadows */
+      --shadow-glass: 0 16px 40px rgba(0, 0, 0, 0.45);
+      --shadow-ambient: 0 4px 20px rgba(0, 0, 0, 0.35);
+      --shadow-elevated: 0 24px 60px rgba(0, 0, 0, 0.65);
     }
 
     /* Reset & Base Styles */
@@ -64,44 +90,46 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     html {
       scroll-behavior: smooth;
-      background-color: var(--color-obsidian);
+      background-color: var(--color-canvas);
       color: var(--text-primary);
       font-family: var(--font-body);
-      font-size: 16px;
-      line-height: 1.6;
+      font-size: 15px;
+      line-height: 1.48;
+      letter-spacing: -0.01em;
       overflow-x: hidden;
     }
 
     body {
-      background-color: var(--color-obsidian);
+      background-color: var(--color-canvas);
       background-image: 
-        radial-gradient(circle at 10% 15%, rgba(255, 0, 122, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 90% 40%, rgba(0, 240, 255, 0.08) 0%, transparent 45%),
-        radial-gradient(circle at 50% 85%, rgba(142, 117, 255, 0.06) 0%, transparent 40%);
+        radial-gradient(circle at 50% 0%, rgba(10, 132, 255, 0.08) 0%, transparent 60%),
+        radial-gradient(circle at 85% 30%, rgba(191, 90, 242, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 15% 70%, rgba(48, 209, 88, 0.04) 0%, transparent 50%);
       background-attachment: fixed;
       min-height: 100vh;
       overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
     }
 
-    /* Custom Scrollbar */
+    /* Apple-style discreet scrollbar */
     ::-webkit-scrollbar {
-      width: 8px;
+      width: 7px;
+      height: 7px;
     }
     ::-webkit-scrollbar-track {
-      background: var(--color-obsidian-deep);
+      background: transparent;
     }
     ::-webkit-scrollbar-thumb {
-      background: linear-gradient(180deg, var(--color-fuchsia), var(--color-cyan));
-      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.18);
+      border-radius: var(--radius-pill);
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: var(--color-cyan);
-      box-shadow: var(--glow-cyan);
+      background: rgba(255, 255, 255, 0.32);
     }
 
     .container {
@@ -111,14 +139,23 @@
       padding: 0 24px;
     }
 
-    /* Focus States */
+    /* Apple Tactile Pointer-Down Feedback */
+    button, .ticker-chip-btn, .prompt-chip, .chart-toggle-btn, .btn-primary, .btn-secondary, .btn-analyze, .btn-gemini-config {
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+    button:active, .ticker-chip-btn:active, .prompt-chip:active, .btn-primary:active, .btn-secondary:active, .btn-analyze:active, .btn-gemini-config:active {
+      transform: scale(0.965);
+      transition: transform 90ms var(--spring-critically-damped);
+    }
+
     :focus-visible {
-      outline: 2px solid var(--color-cyan);
+      outline: 2px solid var(--sf-blue);
       outline-offset: 3px;
     }
 
     /* ==========================================================================
-       2. TOP NAVIGATION & GEMINI STATUS
+       2. TOP NAVIGATION (FROSTED GLASS MATERIAL)
        ========================================================================== */
     .navbar {
       position: sticky;
@@ -126,18 +163,19 @@
       left: 0;
       width: 100%;
       height: var(--nav-height);
-      background: rgba(10, 14, 23, 0.88);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(11, 12, 14, 0.75);
+      backdrop-filter: blur(24px) saturate(190%);
+      -webkit-backdrop-filter: blur(24px) saturate(190%);
+      border-bottom: var(--glass-border);
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03);
       z-index: 1000;
-      transition: background var(--transition-normal);
+      transition: background var(--transition-smooth), border-color var(--transition-smooth);
     }
 
     .navbar.scrolled {
-      background: rgba(5, 8, 14, 0.95);
-      border-bottom-color: rgba(0, 240, 255, 0.25);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      background: rgba(9, 10, 12, 0.88);
+      border-bottom-color: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
 
     .nav-container {
@@ -148,7 +186,6 @@
       max-width: var(--container-max);
       margin: 0 auto;
       padding: 0 24px;
-      gap: 16px;
     }
 
     .brand-logo {
@@ -156,43 +193,45 @@
       align-items: center;
       gap: 12px;
       text-decoration: none;
-      color: var(--text-white);
-      flex-shrink: 0;
+      color: var(--text-primary);
     }
 
     .logo-symbol {
-      width: 38px;
-      height: 38px;
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.04));
+      border: var(--glass-border-specular);
+      box-shadow: var(--glass-highlight);
       display: flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(135deg, var(--color-fuchsia), var(--color-cyan));
-      border-radius: 10px;
-      box-shadow: var(--glow-cyan);
+      transition: transform var(--transition-smooth);
     }
-
+    .brand-logo:hover .logo-symbol {
+      transform: scale(1.05);
+    }
     .logo-symbol svg {
-      width: 22px;
-      height: 22px;
+      width: 18px;
+      height: 18px;
+      stroke: var(--text-primary);
+      stroke-width: 2.2;
       fill: none;
-      stroke: var(--color-obsidian);
-      stroke-width: 2.3;
       stroke-linecap: round;
       stroke-linejoin: round;
     }
 
     .brand-text {
-      font-family: var(--font-heading);
-      font-size: 1.3rem;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      color: var(--text-white);
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      color: var(--text-primary);
     }
-
     .brand-text span {
-      background: linear-gradient(120deg, var(--color-cyan), var(--color-fuchsia));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: var(--sf-blue);
+      font-weight: 500;
+      margin-left: 1px;
     }
 
     .nav-controls-group {
@@ -202,419 +241,116 @@
     }
 
     .nav-skill-badge {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 6px 14px;
-      background: rgba(57, 255, 20, 0.08);
-      border: 1px solid rgba(57, 255, 20, 0.3);
-      border-radius: 9999px;
-      font-size: 0.8rem;
-      font-family: var(--font-heading);
-      font-weight: 600;
-      color: var(--color-green);
+      background: rgba(255, 255, 255, 0.06);
+      border: var(--glass-border);
+      box-shadow: var(--glass-highlight);
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      letter-spacing: -0.01em;
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--sf-green);
+      box-shadow: 0 0 10px rgba(48, 209, 88, 0.7);
+      animation: apple-subtle-pulse 2.2s ease-in-out infinite;
+    }
+
+    .pulse-dot.gemini-dot {
+      background: var(--sf-purple);
+      box-shadow: 0 0 10px rgba(191, 90, 242, 0.8);
+    }
+
+    @keyframes apple-subtle-pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.7; }
     }
 
     .btn-gemini-config {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 6px 16px;
-      background: rgba(142, 117, 255, 0.12);
-      border: 1px solid rgba(142, 117, 255, 0.4);
-      color: #C0B0FF;
-      border-radius: 9999px;
-      font-family: var(--font-heading);
-      font-size: 0.82rem;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 0 15px rgba(142, 117, 255, 0.25);
-      transition: all var(--transition-fast);
-    }
-
-    .btn-gemini-config:hover {
-      background: rgba(142, 117, 255, 0.25);
-      color: #FFFFFF;
-      box-shadow: var(--glow-gemini);
-      transform: translateY(-1px);
-    }
-
-    .btn-gemini-config.active {
-      background: linear-gradient(135deg, rgba(142, 117, 255, 0.3), rgba(0, 240, 255, 0.2));
-      border-color: var(--color-gemini);
-      color: #FFFFFF;
-    }
-
-    .pulse-dot {
-      width: 8px;
-      height: 8px;
-      background-color: var(--color-green);
-      border-radius: 50%;
-      box-shadow: var(--glow-green);
-      animation: pulse-ring 2s infinite ease-in-out;
-    }
-
-    .pulse-dot.gemini-dot {
-      background-color: var(--color-gemini);
-      box-shadow: var(--glow-gemini);
-    }
-
-    @keyframes pulse-ring {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.85); }
-    }
-
-    /* ==========================================================================
-       3. HERO TICKER SEARCH TERMINAL
-       ========================================================================== */
-    .hero-search-section {
-      position: relative;
-      padding: 64px 0 48px;
-      text-align: center;
-      overflow: hidden;
-    }
-
-    .laser-grid-bg {
-      position: absolute;
-      bottom: -60%;
-      left: -50%;
-      width: 200%;
-      height: 120%;
-      background-image: 
-        linear-gradient(to right, rgba(0, 240, 255, 0.12) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 0, 122, 0.12) 1px, transparent 1px);
-      background-size: 50px 50px;
-      transform: perspective(500px) rotateX(68deg);
-      transform-origin: 50% 100%;
-      mask-image: radial-gradient(ellipse at 50% 50%, black 20%, transparent 75%);
-      -webkit-mask-image: radial-gradient(ellipse at 50% 50%, black 20%, transparent 75%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .hero-container {
-      position: relative;
-      z-index: 2;
-      max-width: 860px;
-      margin: 0 auto;
-    }
-
-    .hero-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 16px;
-      border-radius: 9999px;
-      background: rgba(0, 240, 255, 0.08);
-      border: 1px solid rgba(0, 240, 255, 0.3);
-      color: var(--color-cyan);
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-
-    .hero-title {
-      font-family: var(--font-heading);
-      font-size: clamp(2.4rem, 5vw, 3.8rem);
-      font-weight: 700;
-      line-height: 1.12;
-      letter-spacing: -0.02em;
-      color: var(--text-white);
-      margin-bottom: 16px;
-    }
-
-    .hero-title .gradient-text {
-      background: linear-gradient(135deg, #FFFFFF 20%, var(--color-cyan) 50%, var(--color-gemini) 80%, var(--color-fuchsia) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 0 25px rgba(142, 117, 255, 0.35));
-    }
-
-    .hero-subtitle {
-      font-size: 1.1rem;
-      color: var(--text-secondary);
-      max-width: 680px;
-      margin: 0 auto 36px;
-      line-height: 1.6;
-    }
-
-    /* Search Box & Controls */
-    .ticker-search-form {
-      position: relative;
-      max-width: 680px;
-      margin: 0 auto 24px;
-    }
-
-    .search-input-wrapper {
-      display: flex;
-      align-items: center;
-      background: rgba(14, 20, 32, 0.85);
-      border: 2px solid rgba(0, 240, 255, 0.4);
-      border-radius: 16px;
-      padding: 8px 10px 8px 24px;
-      box-shadow: 0 0 25px rgba(0, 240, 255, 0.25), 0 10px 30px rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(16px);
-      transition: all var(--transition-normal);
-    }
-
-    .search-input-wrapper:focus-within {
-      border-color: var(--color-gemini);
-      box-shadow: 0 0 35px rgba(142, 117, 255, 0.5), 0 12px 36px rgba(0, 0, 0, 0.6);
-      transform: translateY(-2px);
-    }
-
-    .search-icon {
-      color: var(--color-cyan);
-      margin-right: 14px;
-      display: flex;
-      align-items: center;
-    }
-
-    .search-icon svg {
-      width: 24px;
-      height: 24px;
-    }
-
-    .ticker-input {
-      flex: 1;
-      background: transparent;
-      border: none;
-      outline: none;
-      font-family: var(--font-heading);
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--text-white);
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-
-    .ticker-input::placeholder {
+      background: rgba(255, 255, 255, 0.07);
+      border: var(--glass-border-specular);
+      box-shadow: var(--glass-highlight);
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
       font-family: var(--font-body);
-      font-size: 1rem;
-      font-weight: 400;
-      color: var(--text-muted);
-      letter-spacing: normal;
-      text-transform: none;
-    }
-
-    .btn-analyze {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 16px 32px;
-      background: linear-gradient(135deg, var(--color-cyan), var(--color-gemini));
-      color: var(--color-obsidian);
-      font-family: var(--font-heading);
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      box-shadow: 0 0 25px rgba(142, 117, 255, 0.45);
-      transition: all var(--transition-fast);
-      white-space: nowrap;
-    }
-
-    .btn-analyze:hover:not(:disabled) {
-      background: linear-gradient(135deg, #4ef4ff, #a996ff);
-      box-shadow: 0 0 35px rgba(142, 117, 255, 0.75);
-      transform: scale(1.02);
-    }
-
-    .btn-analyze:disabled {
-      opacity: 0.7;
-      cursor: not-allowed;
-    }
-
-    .btn-spinner {
-      display: none;
-      width: 18px;
-      height: 18px;
-      border: 2px solid rgba(10, 14, 23, 0.3);
-      border-top-color: var(--color-obsidian);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    .btn-analyze.loading .btn-spinner {
-      display: block;
-    }
-    .btn-analyze.loading .btn-text-icon {
-      display: none;
-    }
-
-    /* Popular Quick Chips */
-    .quick-chips-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .chips-label {
       font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
-    .ticker-chip-btn {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
-      padding: 5px 12px;
-      font-family: var(--font-heading);
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--text-secondary);
+      font-weight: 500;
+      color: var(--text-primary);
       cursor: pointer;
-      transition: all var(--transition-fast);
+      transition: all var(--transition-instant);
     }
-
-    .ticker-chip-btn:hover {
-      background: rgba(0, 240, 255, 0.1);
-      border-color: var(--color-cyan);
-      color: var(--color-cyan);
-      box-shadow: 0 0 12px rgba(0, 240, 255, 0.3);
-      transform: translateY(-1px);
+    .btn-gemini-config:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.22);
     }
-
-    /* ==========================================================================
-       4. SCANNING RADAR & LOADING OVERLAY
-       ========================================================================== */
-    .scanning-overlay {
-      display: none;
-      padding: 60px 20px;
-      text-align: center;
-    }
-
-    .radar-circle {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      border: 2px solid var(--color-gemini);
-      margin: 0 auto 24px;
-      position: relative;
-      box-shadow: 0 0 30px rgba(142, 117, 255, 0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .radar-sweep {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      background: conic-gradient(from 0deg, transparent 70%, rgba(142, 117, 255, 0.45) 100%);
-      animation: radar-spin 1.4s linear infinite;
-    }
-
-    @keyframes radar-spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    .radar-icon {
-      font-size: 1.8rem;
-      z-index: 2;
-    }
-
-    .scanning-step-text {
-      font-family: var(--font-heading);
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--text-white);
-      margin-bottom: 8px;
-    }
-
-    .scanning-subtext {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
+    .btn-gemini-config.active {
+      background: rgba(191, 90, 242, 0.16);
+      border-color: rgba(191, 90, 242, 0.38);
+      color: #E9D5FF;
     }
 
     /* ==========================================================================
-       5. ERROR BANNER & GEMINI MODAL
+       3. GEMINI SETUP MODAL (APPLE SHEET STYLE)
        ========================================================================== */
-    .error-card {
-      display: none;
-      max-width: 680px;
-      margin: 20px auto 40px;
-      padding: 20px 24px;
-      background: rgba(255, 62, 62, 0.08);
-      border: 1px solid var(--color-coral);
-      border-radius: 14px;
-      box-shadow: 0 0 20px rgba(255, 62, 62, 0.25);
-      text-align: left;
-    }
-
-    .error-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-family: var(--font-heading);
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--color-coral);
-      margin-bottom: 6px;
-    }
-
-    .error-desc {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      line-height: 1.5;
-    }
-
-    /* Gemini API Key Modal */
     .modal-backdrop {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(5, 8, 14, 0.85);
-      backdrop-filter: blur(14px);
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       z-index: 2000;
       align-items: center;
       justify-content: center;
       padding: 20px;
+      opacity: 0;
+      transition: opacity 220ms var(--spring-critically-damped);
     }
-
     .modal-backdrop.open {
       display: flex;
+      opacity: 1;
     }
 
     .gemini-modal-card {
-      background: var(--color-card-solid);
-      border: 1px solid var(--color-gemini);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), var(--glow-gemini);
-      border-radius: 20px;
-      padding: 32px 28px;
-      max-width: 540px;
+      background: var(--color-surface-elevated);
+      border: var(--glass-border-specular);
+      box-shadow: var(--shadow-elevated), var(--glass-highlight);
+      border-radius: var(--radius-xl);
+      padding: 32px 30px;
+      max-width: 480px;
       width: 100%;
       position: relative;
+      transform: scale(0.94) translateY(12px);
+      transition: transform 300ms var(--spring-critically-damped);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+    }
+    .modal-backdrop.open .gemini-modal-card {
+      transform: scale(1) translateY(0);
     }
 
     .modal-title {
-      font-family: var(--font-heading);
-      font-size: 1.4rem;
-      color: var(--text-white);
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      color: var(--text-primary);
       margin-bottom: 8px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
-
     .modal-desc {
       font-size: 0.9rem;
       color: var(--text-secondary);
@@ -624,302 +360,565 @@
 
     .modal-input {
       width: 100%;
-      padding: 14px 16px;
-      background: rgba(10, 14, 23, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 10px;
-      color: var(--text-white);
-      font-family: monospace;
-      font-size: 0.95rem;
-      margin-bottom: 16px;
-      outline: none;
+      background: rgba(0, 0, 0, 0.45);
+      border: var(--glass-border-specular);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      transition: border-color var(--transition-instant), box-shadow var(--transition-instant);
     }
-
     .modal-input:focus {
-      border-color: var(--color-gemini);
-      box-shadow: var(--glow-gemini);
+      outline: none;
+      border-color: var(--sf-purple);
+      box-shadow: 0 0 0 3px rgba(191, 90, 242, 0.25);
     }
 
     .modal-btn-row {
       display: flex;
-      justify-content: flex-end;
       gap: 12px;
+      justify-content: flex-end;
+      margin-top: 24px;
     }
 
     .btn-secondary {
-      padding: 10px 18px;
-      background: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.08);
+      border: var(--glass-border);
       color: var(--text-secondary);
-      border-radius: 8px;
+      padding: 10px 18px;
+      border-radius: var(--radius-pill);
+      font-size: 0.88rem;
+      font-weight: 500;
       cursor: pointer;
-      font-family: var(--font-heading);
-      font-weight: 600;
+      transition: all var(--transition-instant);
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.14);
+      color: var(--text-primary);
     }
 
     .btn-primary {
-      padding: 10px 22px;
-      background: var(--color-gemini);
+      background: var(--sf-blue);
       border: none;
       color: #FFFFFF;
-      border-radius: 8px;
+      padding: 10px 20px;
+      border-radius: var(--radius-pill);
+      font-size: 0.88rem;
+      font-weight: 600;
       cursor: pointer;
-      font-family: var(--font-heading);
-      font-weight: 700;
-      box-shadow: var(--glow-gemini);
+      box-shadow: 0 4px 14px var(--sf-blue-glow);
+      transition: all var(--transition-instant);
+    }
+    .btn-primary:hover {
+      background: #0071E3;
+      box-shadow: 0 6px 20px var(--sf-blue-glow);
     }
 
     /* ==========================================================================
-       6. MAIN RESULTS DASHBOARD
+       4. HERO SEARCH & SPOTLIGHT
+       ========================================================================== */
+    .hero-search-section {
+      position: relative;
+      padding: 68px 0 44px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-container {
+      position: relative;
+      z-index: 2;
+      max-width: 780px;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      border: var(--glass-border-specular);
+      box-shadow: var(--glass-highlight);
+      padding: 6px 16px;
+      border-radius: var(--radius-pill);
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5.2vw, 3.8rem);
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      line-height: 1.08;
+      color: var(--text-primary);
+      margin-bottom: 18px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(180deg, #FFFFFF 20%, rgba(255, 255, 255, 0.65) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      color: var(--text-secondary);
+      line-height: 1.52;
+      margin-bottom: 34px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+
+    /* Apple Spotlight Search Capsule */
+    .ticker-search-form {
+      max-width: 600px;
+      margin: 0 auto 24px;
+    }
+
+    .search-input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: rgba(28, 30, 36, 0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: var(--glass-border-specular);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4), var(--glass-highlight);
+      border-radius: var(--radius-pill);
+      padding: 6px 8px 6px 20px;
+      transition: all var(--transition-smooth);
+    }
+    .search-input-wrapper:focus-within {
+      background: rgba(34, 37, 44, 0.95);
+      border-color: rgba(10, 132, 255, 0.6);
+      box-shadow: 0 14px 44px rgba(0, 0, 0, 0.55), 0 0 0 3px rgba(10, 132, 255, 0.25);
+    }
+
+    .search-icon {
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      margin-right: 12px;
+    }
+    .search-icon svg {
+      width: 19px;
+      height: 19px;
+    }
+
+    .ticker-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      font-weight: 500;
+      letter-spacing: -0.015em;
+      outline: none;
+    }
+    .ticker-input::placeholder {
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .btn-analyze {
+      background: var(--sf-blue);
+      border: none;
+      color: #FFFFFF;
+      padding: 10px 22px;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 16px var(--sf-blue-glow);
+      transition: all var(--transition-instant);
+    }
+    .btn-analyze:hover {
+      background: #0071E3;
+      box-shadow: 0 6px 22px var(--sf-blue-glow);
+    }
+    .btn-analyze:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .btn-spinner {
+      display: none;
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(255, 255, 255, 0.35);
+      border-top-color: #FFFFFF;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    .btn-analyze.loading .btn-spinner {
+      display: inline-block;
+    }
+    .btn-analyze.loading .btn-text-icon {
+      display: none;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Quick Select Ticker Pills */
+    .quick-chips-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .chips-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-right: 4px;
+      font-weight: 500;
+    }
+
+    .ticker-chip-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: var(--glass-border);
+      box-shadow: var(--glass-highlight);
+      color: var(--text-secondary);
+      padding: 5px 14px;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      transition: all var(--transition-instant);
+    }
+    .ticker-chip-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.22);
+      color: var(--text-primary);
+    }
+
+    /* ==========================================================================
+       5. SCANNING / LOADING STATE (DYNAMIC ISLAND / ACTIVITY ORB)
+       ========================================================================== */
+    .scanning-overlay {
+      display: none;
+      padding: 64px 20px;
+      text-align: center;
+    }
+
+    .radar-circle {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(10, 132, 255, 0.15), rgba(191, 90, 242, 0.15));
+      border: var(--glass-border-specular);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), var(--glass-highlight);
+      margin: 0 auto 20px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .radar-sweep {
+      position: absolute;
+      inset: -2px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      border-top-color: var(--sf-blue);
+      border-right-color: var(--sf-purple);
+      animation: spin 1.2s cubic-bezier(0.5, 0.1, 0.5, 0.9) infinite;
+    }
+
+    .radar-icon {
+      font-size: 1.6rem;
+      z-index: 2;
+    }
+
+    .scanning-step-text {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+    }
+
+    .scanning-subtext {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    /* Error Card */
+    .error-card {
+      display: none;
+      max-width: 620px;
+      margin: 20px auto 40px;
+      padding: 20px 24px;
+      background: rgba(255, 69, 58, 0.08);
+      border: 1px solid rgba(255, 69, 58, 0.35);
+      border-radius: var(--radius-lg);
+      backdrop-filter: blur(16px);
+      text-align: left;
+    }
+    .error-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--sf-red);
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+    .error-desc {
+      color: var(--text-secondary);
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+
+    /* ==========================================================================
+       6. MAIN RESULTS DASHBOARD (APPLE STOCKS STYLE)
        ========================================================================== */
     .results-dashboard {
       display: none;
       padding-bottom: 80px;
-      animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: apple-settle 0.5s var(--spring-critically-damped) forwards;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes apple-settle {
+      from { opacity: 0; transform: translateY(18px) scale(0.99); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    /* Stock Hero Overview Card */
+    /* Stock Overview Hero Card */
     .stock-hero-card {
-      background: var(--color-card-bg);
-      border: 1px solid var(--color-card-border);
-      border-radius: 24px;
-      padding: 36px 32px;
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(16px);
-      margin-bottom: 32px;
+      background: var(--color-surface-glass);
+      border: var(--glass-border-specular);
+      box-shadow: var(--shadow-glass), var(--glass-highlight);
+      border-radius: var(--radius-xl);
+      padding: 34px 32px;
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      margin-bottom: 30px;
       position: relative;
-    }
-
-    .stock-hero-card::before {
-      content: '';
-      position: absolute;
-      inset: -1px;
-      border-radius: 24px;
-      padding: 1px;
-      background: linear-gradient(135deg, rgba(0, 240, 255, 0.35), transparent 60%, rgba(142, 117, 255, 0.35));
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      pointer-events: none;
     }
 
     .stock-overview-grid {
       display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 32px;
+      grid-template-columns: 1fr auto;
+      gap: 28px;
       align-items: center;
-    }
-
-    .stock-headline-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
     }
 
     .stock-tag-row {
       display: flex;
-      align-items: center;
-      gap: 12px;
+      gap: 8px;
+      margin-bottom: 12px;
     }
 
-    .badge-market {
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 4px 10px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 6px;
-      color: var(--text-muted);
-      letter-spacing: 0.05em;
-    }
-
-    .badge-sector {
-      font-size: 0.75rem;
+    .badge-market, .badge-sector {
+      font-size: 0.76rem;
       font-weight: 600;
       padding: 4px 10px;
-      background: rgba(0, 240, 255, 0.08);
-      border: 1px solid rgba(0, 240, 255, 0.25);
-      border-radius: 6px;
-      color: var(--color-cyan);
+      border-radius: var(--radius-pill);
+      letter-spacing: -0.01em;
+      background: rgba(255, 255, 255, 0.08);
+      border: var(--glass-border);
+      color: var(--text-secondary);
+    }
+    .badge-sector {
+      color: var(--sf-blue);
+      background: rgba(10, 132, 255, 0.12);
+      border-color: rgba(10, 132, 255, 0.28);
     }
 
     .stock-main-symbol {
-      font-family: var(--font-heading);
-      font-size: clamp(2.5rem, 4vw, 3.8rem);
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 4vw, 3.2rem);
       font-weight: 700;
-      color: var(--text-white);
-      line-height: 1.05;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.035em;
+      line-height: 1;
+      color: var(--text-primary);
+      margin-bottom: 4px;
     }
 
     .stock-main-name {
-      font-size: 1.25rem;
+      font-size: 1.15rem;
       color: var(--text-secondary);
       font-weight: 500;
+      letter-spacing: -0.015em;
+      margin-bottom: 16px;
     }
 
     .price-callout-row {
       display: flex;
       align-items: baseline;
-      gap: 18px;
-      margin-top: 14px;
+      gap: 16px;
     }
 
     .hero-current-price {
-      font-family: var(--font-heading);
-      font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 3.5vw, 2.8rem);
       font-weight: 700;
-      color: var(--text-white);
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
       font-variant-numeric: tabular-nums;
     }
 
     .hero-change-badge {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 4px;
+      font-size: 0.95rem;
+      font-weight: 600;
       padding: 6px 14px;
-      border-radius: 9999px;
-      font-family: var(--font-heading);
-      font-size: 1.05rem;
-      font-weight: 700;
+      border-radius: var(--radius-pill);
+      letter-spacing: -0.01em;
       font-variant-numeric: tabular-nums;
     }
-
     .hero-change-badge.bullish {
-      background: rgba(57, 255, 20, 0.12);
-      border: 1px solid var(--color-green);
-      color: var(--color-green);
-      box-shadow: var(--glow-green);
+      background: var(--sf-green-soft);
+      color: var(--sf-green);
+      border: 1px solid rgba(48, 209, 88, 0.3);
     }
-
     .hero-change-badge.bearish {
-      background: rgba(255, 62, 62, 0.12);
-      border: 1px solid var(--color-coral);
-      color: var(--color-coral);
-      box-shadow: var(--glow-coral);
+      background: var(--sf-red-soft);
+      color: var(--sf-red);
+      border: 1px solid rgba(255, 69, 58, 0.3);
     }
 
-    /* Right Column: AI Signal Recommendation Card */
+    /* Recommendation Card (Apple Card Pill) */
     .ai-signal-card {
-      background: rgba(10, 14, 23, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      padding: 26px 24px;
+      background: rgba(255, 255, 255, 0.04);
+      border: var(--glass-border-specular);
+      box-shadow: var(--glass-highlight);
+      border-radius: var(--radius-lg);
+      padding: 22px 26px;
+      min-width: 250px;
       text-align: center;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     }
 
     .signal-header-tag {
-      font-size: 0.75rem;
-      font-family: var(--font-heading);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
+      font-size: 0.76rem;
+      font-weight: 600;
       color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+      display: block;
     }
 
     .signal-verdict-box {
-      font-family: var(--font-heading);
-      font-size: 2.2rem;
+      font-family: var(--font-display);
+      font-size: 1.8rem;
       font-weight: 700;
-      letter-spacing: 0.04em;
-      padding: 10px 20px;
-      border-radius: 12px;
+      letter-spacing: -0.025em;
+      padding: 6px 18px;
+      border-radius: var(--radius-pill);
       display: inline-block;
-      margin: 0 auto;
+      margin-bottom: 14px;
     }
-
-    .signal-verdict-box.buy,
-    .signal-verdict-box.strong-buy {
-      background: rgba(57, 255, 20, 0.12);
-      border: 2px solid var(--color-green);
-      color: var(--color-green);
-      box-shadow: var(--glow-green);
+    .signal-verdict-box.buy {
+      background: var(--sf-green-soft);
+      color: var(--sf-green);
+      border: 1px solid rgba(48, 209, 88, 0.4);
     }
-
-    .signal-verdict-box.hold {
-      background: rgba(255, 184, 0, 0.12);
-      border: 2px solid var(--color-amber);
-      color: var(--color-amber);
-      box-shadow: 0 0 15px rgba(255, 184, 0, 0.4);
-    }
-
     .signal-verdict-box.sell {
-      background: rgba(255, 62, 62, 0.12);
-      border: 2px solid var(--color-coral);
-      color: var(--color-coral);
-      box-shadow: var(--glow-coral);
+      background: var(--sf-red-soft);
+      color: var(--sf-red);
+      border: 1px solid rgba(255, 69, 58, 0.4);
+    }
+    .signal-verdict-box.hold {
+      background: var(--sf-amber-soft);
+      color: var(--sf-amber);
+      border: 1px solid rgba(255, 159, 10, 0.4);
     }
 
     .confidence-meter-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      text-align: left;
+      width: 100%;
     }
-
     .confidence-label-row {
       display: flex;
       justify-content: space-between;
-      font-size: 0.82rem;
-      font-weight: 600;
+      font-size: 0.78rem;
       color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+    .confidence-label-row strong {
+      color: var(--text-primary);
+      font-variant-numeric: tabular-nums;
     }
 
     .confidence-bar-bg {
       width: 100%;
-      height: 8px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 9999px;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-pill);
       overflow: hidden;
     }
-
     .confidence-bar-fill {
       height: 100%;
-      border-radius: 9999px;
-      background: linear-gradient(90deg, var(--color-cyan), var(--color-green));
-      box-shadow: var(--glow-green);
-      transition: width 1s ease-in-out;
+      background: var(--sf-blue);
+      border-radius: var(--radius-pill);
+      transition: width 0.8s var(--spring-critically-damped);
+    }
+
+    /* Executive Reasoning Section */
+    .executive-reasons-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 26px;
+      border-top: var(--glass-border-subtle);
+      padding-top: 24px;
     }
 
     /* ==========================================================================
-       6.5 DEEP GEMINI AI SYNTHESIS CARD
+       7. GEMINI AI SYNTHESIS (APPLE INTELLIGENCE SHEEN)
        ========================================================================== */
     .gemini-synthesis-card {
-      background: linear-gradient(145deg, rgba(20, 16, 40, 0.85), rgba(12, 16, 28, 0.85));
-      border: 1px solid rgba(142, 117, 255, 0.4);
-      border-radius: 24px;
-      padding: 34px 30px;
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6), var(--glow-gemini);
-      margin-bottom: 32px;
+      background: linear-gradient(135deg, rgba(28, 26, 42, 0.78), rgba(20, 22, 32, 0.78));
+      border: var(--glass-border-specular);
+      border-radius: var(--radius-xl);
+      padding: 32px 30px;
+      box-shadow: var(--shadow-glass), inset 0 1px 0 rgba(191, 90, 242, 0.22);
+      margin-bottom: 30px;
       position: relative;
       overflow: hidden;
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
     }
 
+    /* Siri / Apple Intelligence Iridescent Ambient Glow */
     .gemini-synthesis-card::before {
       content: '';
       position: absolute;
-      top: -50px;
-      right: -50px;
-      width: 180px;
-      height: 180px;
+      top: -30px;
+      right: -30px;
+      width: 220px;
+      height: 220px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(142, 117, 255, 0.25) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(191, 90, 242, 0.2) 0%, rgba(10, 132, 255, 0.12) 50%, transparent 70%);
       pointer-events: none;
+      filter: blur(30px);
     }
 
     .gemini-header-row {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       flex-wrap: wrap;
       gap: 12px;
       margin-bottom: 20px;
@@ -929,26 +928,53 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      background: rgba(191, 90, 242, 0.14);
+      border: 1px solid rgba(191, 90, 242, 0.32);
       padding: 6px 14px;
-      background: rgba(142, 117, 255, 0.15);
-      border: 1px solid var(--color-gemini);
-      border-radius: 9999px;
-      font-family: var(--font-heading);
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: #E2DAFF;
-      box-shadow: var(--glow-gemini);
+      border-radius: var(--radius-pill);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #E9D5FF;
+      letter-spacing: -0.01em;
+    }
+
+    /* Gemini Unlock Banner */
+    .gemini-unlock-banner {
+      background: rgba(255, 255, 255, 0.04);
+      border: var(--glass-border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      text-align: center;
+    }
+    .gemini-unlock-banner h4 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+    .gemini-unlock-banner p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      max-width: 520px;
+      margin: 0 auto 16px;
+    }
+    .unlock-input-wrap {
+      display: flex;
+      gap: 10px;
+      max-width: 440px;
+      margin: 0 auto;
     }
 
     .gemini-thesis-box {
       font-size: 1.05rem;
-      line-height: 1.7;
+      line-height: 1.6;
       color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.03);
+      border: var(--glass-border);
+      border-radius: var(--radius-md);
+      padding: 20px 22px;
       margin-bottom: 24px;
-      padding: 18px 20px;
-      background: rgba(10, 14, 23, 0.6);
-      border-left: 3px solid var(--color-gemini);
-      border-radius: 0 12px 12px 0;
+      letter-spacing: -0.01em;
     }
 
     .gemini-debate-grid {
@@ -959,90 +985,61 @@
     }
 
     .debate-col {
-      background: rgba(10, 14, 23, 0.65);
-      border-radius: 16px;
-      padding: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+      border: var(--glass-border);
+      border-radius: var(--radius-lg);
+      padding: 22px 20px;
     }
-
     .debate-col.bull {
-      border-top: 2px solid var(--color-green);
+      background: rgba(48, 209, 88, 0.04);
+      border-color: rgba(48, 209, 88, 0.2);
     }
-
     .debate-col.bear {
-      border-top: 2px solid var(--color-coral);
+      background: rgba(255, 69, 58, 0.04);
+      border-color: rgba(255, 69, 58, 0.2);
     }
 
     .debate-title {
-      font-family: var(--font-heading);
-      font-size: 1rem;
-      font-weight: 700;
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
       margin-bottom: 14px;
       display: flex;
       align-items: center;
       gap: 8px;
     }
-
-    .debate-title.bull { color: var(--color-green); }
-    .debate-title.bear { color: var(--color-coral); }
+    .debate-title.bull { color: var(--sf-green); }
+    .debate-title.bear { color: var(--sf-red); }
 
     .gemini-meta-footer {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding-top: 18px;
-      font-size: 0.88rem;
-    }
-
-    .gemini-meta-item strong {
-      color: #C0B0FF;
-    }
-
-    /* Unlocked / Missing Key Banner */
-    .gemini-unlock-banner {
-      display: none;
-      text-align: center;
-      padding: 30px 20px;
-      background: rgba(142, 117, 255, 0.06);
-      border: 1px dashed rgba(142, 117, 255, 0.4);
-      border-radius: 16px;
-      margin-bottom: 24px;
-    }
-
-    .gemini-unlock-banner h4 {
-      font-family: var(--font-heading);
-      font-size: 1.25rem;
-      color: #E2DAFF;
-      margin-bottom: 8px;
-    }
-
-    .gemini-unlock-banner p {
-      font-size: 0.92rem;
-      color: var(--text-secondary);
-      max-width: 580px;
-      margin: 0 auto 16px;
-    }
-
-    .unlock-input-wrap {
       display: flex;
-      justify-content: center;
-      gap: 10px;
-      max-width: 480px;
-      margin: 0 auto;
+      gap: 24px;
+      flex-wrap: wrap;
+      padding-top: 18px;
+      border-top: var(--glass-border-subtle);
+    }
+    .gemini-meta-item {
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+    }
+    .gemini-meta-item strong {
+      color: var(--text-primary);
+      margin-left: 4px;
     }
 
     /* ==========================================================================
-       7. INTERACTIVE CANDLESTICK / PRICE STUDIO
+       8. APPLE STOCKS CHART STUDIO & INTERACTIVE SCRUBBER
        ========================================================================== */
     .chart-studio-card {
-      background: var(--color-card-bg);
-      border: 1px solid var(--color-card-border);
-      border-radius: 24px;
-      padding: 32px 28px;
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(16px);
-      margin-bottom: 32px;
+      background: var(--color-surface-glass);
+      border: var(--glass-border-specular);
+      box-shadow: var(--shadow-glass), var(--glass-highlight);
+      border-radius: var(--radius-xl);
+      padding: 30px 28px;
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      margin-bottom: 30px;
     }
 
     .chart-toolbar {
@@ -1051,59 +1048,63 @@
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 16px;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .chart-title-wrap {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
     }
 
     .chart-title {
-      font-family: var(--font-heading);
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--text-white);
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
     }
 
+    /* Apple iOS-Style Segmented Control */
     .chart-mode-toggles {
       display: flex;
-      gap: 6px;
-      background: rgba(10, 14, 23, 0.7);
-      padding: 4px;
-      border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.08);
+      border: var(--glass-border);
+      padding: 3px;
+      border-radius: var(--radius-pill);
+      gap: 2px;
     }
 
     .chart-toggle-btn {
-      padding: 6px 14px;
-      font-family: var(--font-heading);
+      padding: 6px 16px;
+      font-family: var(--font-body);
       font-size: 0.82rem;
-      font-weight: 600;
+      font-weight: 500;
       border: none;
       background: transparent;
-      color: var(--text-muted);
-      border-radius: 6px;
+      color: var(--text-secondary);
+      border-radius: var(--radius-pill);
       cursor: pointer;
-      transition: all var(--transition-fast);
+      transition: all var(--transition-instant);
     }
-
     .chart-toggle-btn.active {
-      background: rgba(0, 240, 255, 0.12);
-      color: var(--color-cyan);
-      box-shadow: 0 0 10px rgba(0, 240, 255, 0.25);
+      background: rgba(255, 255, 255, 0.2);
+      color: #FFFFFF;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+      font-weight: 600;
     }
 
+    /* Chart Viewport & Floating Scrubber Card */
     .svg-chart-viewport {
       position: relative;
       width: 100%;
       height: 380px;
-      background: rgba(5, 8, 14, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 16px;
+      background: rgba(0, 0, 0, 0.35);
+      border: var(--glass-border);
+      border-radius: var(--radius-lg);
       overflow: hidden;
       cursor: crosshair;
+      touch-action: none;
     }
 
     .chart-svg {
@@ -1112,20 +1113,24 @@
       display: block;
     }
 
+    /* Floating Glass Tooltip with Apple Depth */
     .chart-hover-card {
       position: absolute;
       top: 14px;
       left: 18px;
-      background: rgba(10, 14, 23, 0.88);
-      border: 1px solid var(--color-cyan);
-      box-shadow: var(--glow-cyan);
-      border-radius: 10px;
-      padding: 8px 14px;
-      font-size: 0.8rem;
-      display: flex;
+      background: rgba(20, 22, 28, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: var(--glass-border-specular);
+      box-shadow: var(--shadow-ambient), var(--glass-highlight);
+      border-radius: var(--radius-md);
+      padding: 8px 16px;
+      font-size: 0.82rem;
+      display: none;
       gap: 16px;
       pointer-events: none;
-      backdrop-filter: blur(12px);
+      z-index: 10;
+      transition: opacity 150ms var(--spring-critically-damped);
     }
 
     .hover-stat-item {
@@ -1136,10 +1141,11 @@
       color: var(--text-muted);
       font-size: 0.7rem;
       text-transform: uppercase;
+      letter-spacing: 0.04em;
     }
     .hover-stat-item span:last-child {
-      color: var(--text-white);
-      font-weight: 700;
+      color: var(--text-primary);
+      font-weight: 600;
       font-variant-numeric: tabular-nums;
     }
 
@@ -1151,29 +1157,46 @@
       font-size: 0.78rem;
       color: var(--text-muted);
     }
-
     .legend-item {
       display: flex;
       align-items: center;
       gap: 6px;
     }
     .legend-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 2px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
     }
 
     /* ==========================================================================
-       8. 8-DIMENSION FUNDAMENTAL & TECHNICAL MATRIX & 6-POINT SCREEN
+       9. 8-DIMENSION MATRIX & QUALITY SCREEN (APPLE WIDGETS)
        ========================================================================== */
+    .section-headline-block {
+      margin-bottom: 20px;
+    }
+    .section-headline-block h3 {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    .section-headline-block p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    /* 6-Point Quality Screen Card */
     .quality-screen-card {
-      background: linear-gradient(145deg, rgba(14, 20, 32, 0.9), rgba(10, 14, 23, 0.95));
-      border: 1px solid rgba(0, 240, 255, 0.3);
-      border-radius: 24px;
-      padding: 30px 28px;
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5), 0 0 25px rgba(0, 240, 255, 0.1);
-      margin-bottom: 32px;
-      position: relative;
+      background: var(--color-surface-glass);
+      border: var(--glass-border-specular);
+      box-shadow: var(--shadow-glass), var(--glass-highlight);
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      margin-bottom: 30px;
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
     }
 
     .quality-screen-header {
@@ -1182,259 +1205,210 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 16px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .quality-screen-title {
-      font-family: var(--font-heading);
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: var(--text-white);
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
       display: flex;
       align-items: center;
       gap: 10px;
     }
 
     .quality-score-pill {
-      font-family: var(--font-heading);
-      font-size: 0.9rem;
-      font-weight: 700;
-      padding: 6px 16px;
-      border-radius: 9999px;
-      letter-spacing: 0.04em;
+      font-size: 0.84rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      letter-spacing: -0.01em;
     }
-
     .quality-score-pill.strong {
-      background: rgba(57, 255, 20, 0.15);
-      border: 1px solid var(--color-green);
-      color: var(--color-green);
-      box-shadow: var(--glow-green);
+      background: var(--sf-green-soft);
+      color: var(--sf-green);
+      border: 1px solid rgba(48, 209, 88, 0.35);
     }
     .quality-score-pill.moderate {
-      background: rgba(255, 184, 0, 0.15);
-      border: 1px solid var(--color-amber);
-      color: var(--color-amber);
-      box-shadow: 0 0 12px rgba(255, 184, 0, 0.3);
+      background: var(--sf-amber-soft);
+      color: var(--sf-amber);
+      border: 1px solid rgba(255, 159, 10, 0.35);
     }
     .quality-score-pill.caution {
-      background: rgba(255, 62, 62, 0.15);
-      border: 1px solid var(--color-coral);
-      color: var(--color-coral);
-      box-shadow: var(--glow-coral);
+      background: var(--sf-red-soft);
+      color: var(--sf-red);
+      border: 1px solid rgba(255, 69, 58, 0.35);
     }
 
     .quality-progress-wrap {
+      width: 100%;
+      height: 7px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-pill);
+      overflow: hidden;
       margin-bottom: 24px;
     }
-
-    .quality-progress-bg {
-      width: 100%;
-      height: 8px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 9999px;
-      overflow: hidden;
-    }
-
     .quality-progress-fill {
       height: 100%;
-      border-radius: 9999px;
-      background: linear-gradient(90deg, var(--color-cyan), var(--color-green));
-      box-shadow: var(--glow-green);
-      transition: width 0.8s ease-in-out;
+      border-radius: var(--radius-pill);
+      transition: width 0.8s var(--spring-critically-damped);
     }
 
     .quality-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
     }
 
     .quality-item-card {
-      background: rgba(10, 14, 23, 0.75);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 16px;
-      padding: 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border: var(--glass-border);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: all var(--transition-fast);
-      position: relative;
+      transition: transform var(--transition-instant), background var(--transition-instant);
     }
-
+    .quality-item-card:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
     .quality-item-card.passed {
-      border-color: rgba(57, 255, 20, 0.35);
-      background: rgba(57, 255, 20, 0.03);
+      border-left: 3px solid var(--sf-green);
     }
-
     .quality-item-card.failed {
-      border-color: rgba(255, 62, 62, 0.35);
-      background: rgba(255, 62, 62, 0.03);
+      border-left: 3px solid var(--sf-red);
     }
 
     .quality-item-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
-
     .quality-item-title {
-      font-family: var(--font-heading);
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--text-white);
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-primary);
     }
 
     .quality-status-badge {
       font-size: 0.72rem;
       font-weight: 700;
-      padding: 3px 8px;
-      border-radius: 6px;
-      letter-spacing: 0.05em;
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
     }
-
     .quality-status-badge.passed {
-      background: rgba(57, 255, 20, 0.15);
-      color: var(--color-green);
-      border: 1px solid var(--color-green);
+      background: var(--sf-green-soft);
+      color: var(--sf-green);
     }
-
     .quality-status-badge.failed {
-      background: rgba(255, 62, 62, 0.15);
-      color: var(--color-coral);
-      border: 1px solid var(--color-coral);
+      background: var(--sf-red-soft);
+      color: var(--sf-red);
     }
 
     .quality-item-val {
-      font-family: var(--font-heading);
-      font-size: 1.6rem;
+      font-size: 1.15rem;
       font-weight: 700;
-      color: var(--text-white);
-      margin: 4px 0 2px;
       font-variant-numeric: tabular-nums;
+      margin: 4px 0;
     }
-
     .quality-target-rule {
-      font-size: 0.78rem;
-      color: var(--color-cyan);
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .quality-item-desc {
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       color: var(--text-muted);
-      line-height: 1.4;
     }
 
-    .section-headline-block {
-      margin-bottom: 24px;
-    }
-
-    .section-headline-block h3 {
-      font-family: var(--font-heading);
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: var(--text-white);
-    }
-
-    .section-headline-block p {
-      font-size: 0.95rem;
-      color: var(--text-secondary);
-    }
-
+    /* 8-Dimension Matrix Grid */
     .dimensions-matrix-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-bottom: 36px;
+      gap: 20px;
+      margin-bottom: 34px;
     }
 
     .dimension-card {
-      background: var(--color-card-bg);
-      border: 1px solid var(--color-card-border);
-      border-radius: 20px;
-      padding: 24px 22px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(12px);
-      transition: all var(--transition-fast);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      background: var(--color-surface-glass);
+      border: var(--glass-border-specular);
+      box-shadow: var(--shadow-ambient), var(--glass-highlight);
+      border-radius: var(--radius-lg);
+      padding: 22px 20px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      transition: transform var(--transition-instant), background var(--transition-instant);
     }
-
     .dimension-card:hover {
-      border-color: rgba(0, 240, 255, 0.3);
-      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 240, 255, 0.15);
+      background: var(--color-surface-glass-hover);
       transform: translateY(-2px);
     }
 
     .dim-card-header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: var(--glass-border-subtle);
     }
-
     .dim-title {
-      font-family: var(--font-heading);
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--text-white);
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      color: var(--text-primary);
       display: flex;
       align-items: center;
       gap: 8px;
     }
-
-    .dim-icon {
-      color: var(--color-cyan);
-    }
-
     .dim-score-badge {
-      font-size: 0.75rem;
-      font-weight: 700;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.06);
       padding: 3px 8px;
-      border-radius: 6px;
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--text-secondary);
+      border-radius: var(--radius-pill);
     }
 
     .dim-metrics-list {
       display: flex;
       flex-direction: column;
       gap: 10px;
-      font-size: 0.85rem;
     }
-
     .dim-row {
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      font-size: 0.84rem;
+    }
+    .dim-row span {
       color: var(--text-secondary);
     }
-
     .dim-row strong {
-      color: var(--text-white);
+      color: var(--text-primary);
+      font-weight: 600;
       font-variant-numeric: tabular-nums;
     }
 
     /* ==========================================================================
-       9. LIVE NEWS & GEMINI AI COPILOT CHAT
+       10. GEMINI COPILOT (APPLE MESSAGES) & LIVE NEWS
        ========================================================================== */
     .bottom-studios-grid {
       display: grid;
       grid-template-columns: 1fr 1.2fr;
-      gap: 28px;
+      gap: 24px;
       margin-top: 10px;
     }
 
-    /* Interactive Gemini Stock Copilot */
+    /* Apple Messages-Style Copilot Card */
     .gemini-copilot-card {
-      background: var(--color-card-bg);
-      border: 1px solid rgba(142, 117, 255, 0.35);
-      border-radius: 24px;
-      padding: 28px;
-      backdrop-filter: blur(14px);
-      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+      background: var(--color-surface-glass);
+      border: var(--glass-border-specular);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      box-shadow: var(--shadow-glass), var(--glass-highlight);
       display: flex;
       flex-direction: column;
       height: 560px;
@@ -1444,16 +1418,15 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 18px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: var(--glass-border-subtle);
     }
-
     .copilot-title {
-      font-family: var(--font-heading);
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--text-white);
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
       display: flex;
       align-items: center;
       gap: 8px;
@@ -1464,147 +1437,149 @@
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 14px;
-      padding-right: 6px;
-      margin-bottom: 16px;
+      gap: 12px;
+      padding-right: 4px;
+      margin-bottom: 14px;
     }
 
+    /* Apple Chat Bubbles */
     .chat-msg {
-      padding: 12px 16px;
-      border-radius: 12px;
-      font-size: 0.88rem;
-      line-height: 1.5;
-      max-width: 90%;
+      max-width: 85%;
+      padding: 10px 16px;
+      font-size: 0.9rem;
+      line-height: 1.45;
+      letter-spacing: -0.01em;
+      word-break: break-word;
     }
-
-    .chat-msg.user {
-      align-self: flex-end;
-      background: rgba(0, 240, 255, 0.15);
-      border: 1px solid rgba(0, 240, 255, 0.3);
-      color: var(--text-primary);
-    }
-
     .chat-msg.ai {
       align-self: flex-start;
-      background: rgba(142, 117, 255, 0.12);
-      border: 1px solid rgba(142, 117, 255, 0.25);
+      background: rgba(255, 255, 255, 0.08);
+      border: var(--glass-border);
+      border-radius: 18px 18px 18px 4px;
       color: var(--text-primary);
+    }
+    .chat-msg.user {
+      align-self: flex-end;
+      background: var(--sf-blue);
+      border-radius: 18px 18px 4px 18px;
+      color: #FFFFFF;
+      box-shadow: 0 4px 12px var(--sf-blue-glow);
     }
 
     .copilot-prompts-row {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       overflow-x: auto;
-      padding-bottom: 10px;
-      margin-bottom: 12px;
+      padding-bottom: 8px;
+      margin-bottom: 8px;
+      scrollbar-width: none;
+    }
+    .copilot-prompts-row::-webkit-scrollbar {
+      display: none;
     }
 
     .prompt-chip {
-      white-space: nowrap;
-      font-size: 0.75rem;
-      padding: 4px 10px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      border: var(--glass-border);
       color: var(--text-secondary);
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      font-size: 0.76rem;
+      font-weight: 500;
+      white-space: nowrap;
       cursor: pointer;
-      transition: all var(--transition-fast);
+      transition: all var(--transition-instant);
     }
-
     .prompt-chip:hover {
-      border-color: var(--color-gemini);
-      color: #E2DAFF;
+      background: rgba(255, 255, 255, 0.12);
+      color: var(--text-primary);
     }
 
     .copilot-input-form {
       display: flex;
-      gap: 10px;
+      gap: 8px;
+      position: relative;
     }
-
     .copilot-input {
       flex: 1;
-      padding: 12px 16px;
-      background: rgba(10, 14, 23, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 10px;
-      color: var(--text-white);
+      background: rgba(0, 0, 0, 0.35);
+      border: var(--glass-border-specular);
+      border-radius: var(--radius-pill);
+      padding: 10px 18px;
+      font-family: var(--font-body);
       font-size: 0.88rem;
+      color: var(--text-primary);
       outline: none;
+      transition: border-color var(--transition-instant);
     }
-
     .copilot-input:focus {
-      border-color: var(--color-gemini);
-      box-shadow: var(--glow-gemini);
+      border-color: var(--sf-purple);
     }
 
     .btn-copilot-send {
-      padding: 12px 18px;
-      background: var(--color-gemini);
+      background: var(--sf-purple);
       border: none;
-      border-radius: 10px;
       color: #FFFFFF;
-      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: var(--radius-pill);
+      font-size: 0.85rem;
+      font-weight: 600;
       cursor: pointer;
-      transition: all var(--transition-fast);
+      transition: all var(--transition-instant);
     }
-
     .btn-copilot-send:hover {
-      background: #a996ff;
-      box-shadow: var(--glow-gemini);
+      background: #A855F7;
     }
 
-    /* News Feed */
+    /* Apple News-Style Headlines Card */
     .news-feed-card {
-      background: var(--color-card-bg);
-      border: 1px solid var(--color-card-border);
-      border-radius: 24px;
-      padding: 28px;
-      backdrop-filter: blur(14px);
-      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
-      height: 560px;
+      background: var(--color-surface-glass);
+      border: var(--glass-border-specular);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      box-shadow: var(--shadow-glass), var(--glass-highlight);
       display: flex;
       flex-direction: column;
+      height: 560px;
     }
 
     .news-list {
       flex: 1;
+      overflow-y: auto;
       display: flex;
       flex-direction: column;
       gap: 12px;
-      overflow-y: auto;
-      padding-right: 6px;
+      padding-right: 4px;
     }
 
     .news-item-card {
-      background: rgba(10, 14, 23, 0.75);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 12px;
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.03);
+      border: var(--glass-border);
+      border-radius: var(--radius-md);
       padding: 14px 16px;
       display: flex;
       flex-direction: column;
       gap: 6px;
-      transition: all var(--transition-fast);
-      text-decoration: none;
-      color: inherit;
+      transition: all var(--transition-instant);
     }
-
     .news-item-card:hover {
-      border-color: rgba(0, 240, 255, 0.4);
-      background: rgba(14, 23, 38, 0.95);
-      transform: translateX(4px);
+      background: rgba(255, 255, 255, 0.07);
+      transform: translateY(-1px);
     }
 
     .news-meta-row {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      font-size: 0.75rem;
+      font-size: 0.74rem;
       color: var(--text-muted);
+      letter-spacing: -0.01em;
     }
-
     .news-source {
-      color: var(--color-cyan);
       font-weight: 600;
+      color: var(--text-secondary);
     }
 
     .news-headline {
@@ -1612,32 +1587,65 @@
       font-weight: 600;
       color: var(--text-primary);
       line-height: 1.4;
+      letter-spacing: -0.015em;
     }
 
     /* ==========================================================================
-       10. FOOTER
+       11. SITE FOOTER
        ========================================================================== */
     .site-footer {
-      background: var(--color-obsidian-deep);
-      border-top: 1px solid rgba(142, 117, 255, 0.25);
-      padding: 40px 0 32px;
-      margin-top: 40px;
+      background: var(--color-canvas);
+      border-top: var(--glass-border);
+      padding: 40px 0 34px;
+      margin-top: 50px;
       text-align: center;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       color: var(--text-muted);
     }
 
     .footer-content {
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      max-width: 800px;
+      gap: 10px;
+      max-width: 820px;
       margin: 0 auto;
     }
 
     .footer-skill-note {
-      color: #C0B0FF;
-      font-weight: 600;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+    .footer-skill-note code {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: var(--sf-purple);
+    }
+
+    /* ==========================================================================
+       12. ACCESSIBILITY & REDUCED MOTION (APPLE HIG COMPLIANCE)
+       ========================================================================== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .radar-sweep, .pulse-dot {
+        animation: none !important;
+      }
+      button:active, .ticker-chip-btn:active {
+        transform: none !important;
+      }
+    }
+
+    @media (prefers-reduced-transparency: reduce) {
+      .navbar, .stock-hero-card, .gemini-synthesis-card, .chart-studio-card, .quality-screen-card, .dimension-card, .gemini-copilot-card, .news-feed-card {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: #14161B !important;
+      }
     }
 
     /* Responsive Breakpoints */
@@ -1654,6 +1662,9 @@
       .bottom-studios-grid {
         grid-template-columns: 1fr;
       }
+      .executive-reasons-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 768px) {
@@ -1664,9 +1675,11 @@
         flex-direction: column;
         padding: 12px;
         gap: 12px;
+        border-radius: var(--radius-xl);
       }
       .btn-analyze {
         width: 100%;
+        justify-content: center;
       }
       .ticker-input {
         width: 100%;
@@ -1678,7 +1691,7 @@
 <body>
 
   <!-- ==========================================================================
-       NAVIGATION & GEMINI STATUS
+       TOP NAVIGATION
        ========================================================================== -->
   <header>
     <nav class="navbar" id="navbar" aria-label="Main Navigation">
@@ -1713,14 +1726,14 @@
     </nav>
   </header>
 
-  <!-- Gemini API Key Modal -->
+  <!-- Gemini API Key Modal (Apple Sheet) -->
   <div class="modal-backdrop" id="geminiModal" aria-modal="true" role="dialog">
     <div class="gemini-modal-card">
       <h3 class="modal-title">
-        <span>✨ Google Gemini AI Configuration</span>
+        <span>✨ Apple Intelligence & Gemini Setup</span>
       </h3>
       <p class="modal-desc">
-        Connect your Google Gemini API key to activate real-time generative investment memos, institutional Bull vs. Bear scenario modeling, and the interactive stock copilot.
+        Connect your Google Gemini API key to activate real-time generative investment memos, institutional Bull vs. Bear scenario modeling, and the conversational stock copilot.
       </p>
 
       <input 
@@ -1732,7 +1745,7 @@
       >
 
       <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px;">
-        Don't have a key? Get one for free at <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener noreferrer" style="color: var(--color-cyan); text-decoration: underline;">Google AI Studio</a>. Keys are stored locally in your browser.
+        Keys are stored securely and locally in your browser. Get a key at <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener noreferrer" style="color: var(--sf-blue); text-decoration: underline;">Google AI Studio</a>.
       </div>
 
       <div class="modal-btn-row">
@@ -1747,8 +1760,6 @@
          HERO SEARCH & TICKER INPUT SECTION
          ========================================================================== -->
     <section class="hero-search-section">
-      <div class="laser-grid-bg" aria-hidden="true"></div>
-
       <div class="container hero-container">
         
         <div class="hero-pill">
@@ -1757,18 +1768,18 @@
 
         <h1 class="hero-title">
           Analyze Any Stock.<br>
-          <span class="gradient-text">Powered by Gemini AI & Quant Skills.</span>
+          <span class="gradient-text">Designed with Fluid Intelligence.</span>
         </h1>
 
         <p class="hero-subtitle">
-          Enter any US stock or crypto ticker to instantly run Yahoo Finance technical calculations, earnings beats, institutional sentiment, and Gemini 2.5 Flash qualitative intelligence.
+          Enter any US stock or crypto ticker to instantly run Yahoo Finance technical calculations, earnings surprises, institutional sentiment, and Gemini qualitative intelligence.
         </p>
 
         <!-- Ticker Search Form -->
         <form class="ticker-search-form" id="tickerForm">
           <div class="search-input-wrapper">
             <div class="search-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
@@ -1778,7 +1789,7 @@
               type="text" 
               id="tickerInput" 
               class="ticker-input" 
-              placeholder="Enter ticker (e.g. NVDA, AAPL, TSLA, BTC-USD)..." 
+              placeholder="Search ticker (e.g. AAPL, NVDA, TSLA, BTC-USD)..." 
               maxlength="10" 
               autocomplete="off" 
               required
@@ -1787,14 +1798,14 @@
 
             <button type="submit" class="btn-analyze" id="analyzeBtn">
               <span class="btn-spinner" aria-hidden="true"></span>
-              <span class="btn-text-icon">Analyze Stock ⚡</span>
+              <span class="btn-text-icon">Analyze Stock</span>
             </button>
           </div>
         </form>
 
         <!-- Quick Select Ticker Chips -->
         <div class="quick-chips-wrapper">
-          <span class="chips-label">Popular Tickers:</span>
+          <span class="chips-label">Popular:</span>
           <button type="button" class="ticker-chip-btn" data-ticker="NVDA">NVDA</button>
           <button type="button" class="ticker-chip-btn" data-ticker="AAPL">AAPL</button>
           <button type="button" class="ticker-chip-btn" data-ticker="TSLA">TSLA</button>
@@ -1809,7 +1820,7 @@
     </section>
 
     <!-- ==========================================================================
-         SCANNING / LOADING RADAR STATE
+         SCANNING / LOADING STATE
          ========================================================================== -->
     <div class="scanning-overlay" id="scanningOverlay" aria-live="polite">
       <div class="radar-circle">
@@ -1863,12 +1874,12 @@
 
           <!-- AI Signal Recommendation Box -->
           <div class="ai-signal-card">
-            <span class="signal-header-tag">Quantitative Skill Recommendation</span>
+            <span class="signal-header-tag">Quantitative Recommendation</span>
             <div class="signal-verdict-box buy" id="signalVerdict">BUY</div>
             
             <div class="confidence-meter-wrap">
               <div class="confidence-label-row">
-                <span>Confidence Rating:</span>
+                <span>Confidence Rating</span>
                 <strong id="confidenceVal">82%</strong>
               </div>
               <div class="confidence-bar-bg">
@@ -1880,11 +1891,11 @@
         </div>
 
         <!-- Executive Reasoning Points & Caveats -->
-        <div class="executive-reasons-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 24px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px;">
+        <div class="executive-reasons-grid">
           
           <div>
-            <h4 style="font-family: var(--font-heading); color: var(--text-white); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <h4 style="font-family: var(--font-display); color: var(--text-primary); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; font-weight: 600;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--sf-green)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
               Key Supporting Factors
             </h4>
             <ul class="bullet-list" id="supportingPointsList" style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
@@ -1893,8 +1904,8 @@
           </div>
 
           <div>
-            <h4 style="font-family: var(--font-heading); color: var(--text-white); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            <h4 style="font-family: var(--font-display); color: var(--text-primary); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; font-weight: 600;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--sf-amber)" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
               Risk Flags & Caveats
             </h4>
             <ul class="bullet-list" id="caveatsList" style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
@@ -1910,16 +1921,16 @@
         
         <div class="gemini-header-row">
           <div class="gemini-badge">
-            <span>✨ Gemini 2.5 Flash Qualitative Synthesis</span>
+            <span>✨ Gemini Qualitative Intelligence</span>
           </div>
-          <span style="font-size: 0.8rem; color: var(--text-muted);" id="geminiTimestamp">Grounded in SEC filings & Live Telemetry</span>
+          <span style="font-size: 0.82rem; color: var(--text-muted);" id="geminiTimestamp">Grounded in SEC filings & Live Telemetry</span>
         </div>
 
         <!-- If Gemini Key Not Set: Prompt Banner -->
         <div class="gemini-unlock-banner" id="geminiUnlockBanner">
           <h4>⚡ Activate Gemini Generative Stock Analysis</h4>
           <p>
-            Connect your free Google Gemini API key to unlock institutional qualitative memos, Bull vs. Bear scenario models, and the real-time AI Copilot.
+            Connect your free Google Gemini API key to unlock institutional qualitative memos, Bull vs. Bear scenario models, and the conversational AI Copilot.
           </p>
           <div class="unlock-input-wrap">
             <input type="password" id="bannerKeyInput" class="modal-input" style="margin-bottom:0;" placeholder="Paste Gemini Key (AIzaSy...)">
@@ -1971,11 +1982,11 @@
 
       </section>
 
-      <!-- 2. Interactive Technical Chart Studio -->
+      <!-- 2. Interactive Apple Stocks Chart Studio -->
       <section class="chart-studio-card">
         <div class="chart-toolbar">
           <div class="chart-title-wrap">
-            <h3 class="chart-title">Price Action & Technical Volume Studio</h3>
+            <h3 class="chart-title">Price Action Studio</h3>
             <span class="badge-market" id="chartRangeBadge">60 Trading Days</span>
           </div>
 
@@ -2024,19 +2035,19 @@
         <!-- Chart Legend -->
         <div class="chart-legend">
           <div class="legend-item">
-            <div class="legend-dot" style="background: var(--color-green);"></div>
+            <div class="legend-dot" style="background: var(--sf-green);"></div>
             <span>Bullish Session</span>
           </div>
           <div class="legend-item">
-            <div class="legend-dot" style="background: var(--color-coral);"></div>
+            <div class="legend-dot" style="background: var(--sf-red);"></div>
             <span>Bearish Session</span>
           </div>
           <div class="legend-item">
-            <div class="legend-dot" style="background: var(--color-cyan);"></div>
-            <span>20-Day Simple Moving Avg (SMA)</span>
+            <div class="legend-dot" style="background: var(--sf-amber);"></div>
+            <span>20-Day SMA</span>
           </div>
           <div class="legend-item">
-            <div class="legend-dot" style="background: rgba(255, 255, 255, 0.2);"></div>
+            <div class="legend-dot" style="background: rgba(255, 255, 255, 0.25);"></div>
             <span>Volume Histogram</span>
           </div>
         </div>
@@ -2066,9 +2077,7 @@
           </div>
 
           <div class="quality-progress-wrap">
-            <div class="quality-progress-bg">
-              <div class="quality-progress-fill" id="qualityProgressFill" style="width: 0%;"></div>
-            </div>
+            <div class="quality-progress-fill" id="qualityProgressFill" style="width: 0%;"></div>
           </div>
 
           <div class="quality-grid" id="qualityChecksGrid">
@@ -2081,7 +2090,7 @@
           <!-- Dimension 1: Fundamentals -->
           <div class="dimension-card">
             <div class="dim-card-header">
-              <span class="dim-title"><span class="dim-icon">⚖️</span> Fundamentals & Quality</span>
+              <span class="dim-title"><span>⚖️</span> Fundamentals & Quality</span>
               <span class="dim-score-badge" id="scoreFundamentals">Weight: 20%</span>
             </div>
             <div class="dim-metrics-list">
@@ -2101,7 +2110,7 @@
           <!-- Dimension 2: Analyst Targets -->
           <div class="dimension-card">
             <div class="dim-card-header">
-              <span class="dim-title"><span class="dim-icon">🎯</span> Analyst Targets</span>
+              <span class="dim-title"><span>🎯</span> Analyst Targets</span>
               <span class="dim-score-badge" id="scoreAnalyst">Weight: 20%</span>
             </div>
             <div class="dim-metrics-list">
@@ -2115,7 +2124,7 @@
           <!-- Dimension 3: Earnings Surprise -->
           <div class="dimension-card">
             <div class="dim-card-header">
-              <span class="dim-title"><span class="dim-icon">⚡</span> Earnings Surprise</span>
+              <span class="dim-title"><span>⚡</span> Earnings Surprise</span>
               <span class="dim-score-badge" id="scoreEarnings">Weight: 30%</span>
             </div>
             <div class="dim-metrics-list">
@@ -2129,11 +2138,11 @@
           <!-- Dimension 4: Technical Momentum -->
           <div class="dimension-card">
             <div class="dim-card-header">
-              <span class="dim-title"><span class="dim-icon">🚀</span> Momentum & RSI</span>
+              <span class="dim-title"><span>🚀</span> Momentum & RSI</span>
               <span class="dim-score-badge" id="scoreMomentum">Weight: 15%</span>
             </div>
             <div class="dim-metrics-list">
-              <div class="dim-row"><span>14-Day RSI Oscillation:</span> <strong id="rsiVal">--</strong></div>
+              <div class="dim-row"><span>14-Day RSI:</span> <strong id="rsiVal">--</strong></div>
               <div class="dim-row"><span>RSI Condition:</span> <strong id="rsiStatus">--</strong></div>
               <div class="dim-row"><span>Near 52-Week High:</span> <strong id="nearHigh">--</strong></div>
               <div class="dim-row"><span>Relative Volume Ratio:</span> <strong id="volumeRatio">--</strong></div>
@@ -2143,7 +2152,7 @@
           <!-- Dimension 5: Sector Performance -->
           <div class="dimension-card">
             <div class="dim-card-header">
-              <span class="dim-title"><span class="dim-icon">🌐</span> Sector Dynamics</span>
+              <span class="dim-title"><span>🌐</span> Sector Dynamics</span>
               <span class="dim-score-badge" id="scoreSector">Weight: 15%</span>
             </div>
             <div class="dim-metrics-list">
@@ -2157,14 +2166,14 @@
           <!-- Dimension 6: Macro Market Context -->
           <div class="dimension-card">
             <div class="dim-card-header">
-              <span class="dim-title"><span class="dim-icon">🛡️</span> Macro & Volatility</span>
+              <span class="dim-title"><span>🛡️</span> Macro & Volatility</span>
               <span class="dim-score-badge" id="scoreMacro">Weight: 10%</span>
             </div>
             <div class="dim-metrics-list">
               <div class="dim-row"><span>VIX Index Level:</span> <strong id="vixVal">--</strong></div>
               <div class="dim-row"><span>Market Regime:</span> <strong id="marketRegime">--</strong></div>
               <div class="dim-row"><span>SPY 10-Day Trend:</span> <strong id="spyTrend">--</strong></div>
-              <div class="dim-row"><span>Safe-Haven Risk-Off:</span> <strong id="riskOff">--</strong></div>
+              <div class="dim-row"><span>Safe-Haven Status:</span> <strong id="riskOff">--</strong></div>
             </div>
           </div>
 
@@ -2180,7 +2189,7 @@
 
         <div class="bottom-studios-grid">
           
-          <!-- Gemini AI Stock Copilot (Live Chat) -->
+          <!-- Gemini AI Stock Copilot (Apple Messages Style) -->
           <div class="gemini-copilot-card">
             <div class="copilot-header">
               <span class="copilot-title">
@@ -2218,7 +2227,7 @@
           <!-- Real-Time Breaking News Feed -->
           <div class="news-feed-card">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-              <h4 style="font-family: var(--font-heading); color: var(--text-white); font-size: 1.15rem;">
+              <h4 style="font-family: var(--font-display); color: var(--text-primary); font-size: 1.15rem; font-weight: 600;">
                 Breaking Financial Headlines
               </h4>
               <span class="badge-market" id="newsSentimentBadge">Sentiment: Bullish</span>
@@ -2244,18 +2253,43 @@
         Integrated with Project Skill: <code>stock-analysis (v5.0)</code> • Google Gemini AI • Yahoo Finance & Google News RSS
       </div>
       <div>
-        © <span id="currentYear">2026</span> Stock Analytics. For informational and educational purposes only. Past performance does not guarantee future results. Not financial advice.
+        © <span id="currentYear">2026</span> Stock Analytics. Designed with Apple Human Interface principles. For educational purposes only.
       </div>
     </div>
   </footer>
 
   <!-- ==========================================================================
-       JAVASCRIPT: CLIENT ORCHESTRATION & GEMINI INTEGRATION
-       ========================================================================== */
-  -->
+       JAVASCRIPT: CLIENT ORCHESTRATION, CHARTS & FLUID SCRUBBER
+       ========================================================================== -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       'use strict';
+
+      // Subtle Utility Haptic Audio (Apple Click)
+      let audioCtx = null;
+      function playAppleTick(freq = 800, dur = 0.015) {
+        try {
+          if (!audioCtx) {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (AudioContext) audioCtx = new AudioContext();
+          }
+          if (audioCtx && audioCtx.state === 'suspended') {
+            audioCtx.resume();
+          }
+          if (audioCtx) {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+            gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + dur);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + dur);
+          }
+        } catch (_) {}
+      }
 
       // Elements
       const tickerForm = document.getElementById('tickerForm');
@@ -2308,7 +2342,6 @@
       // Get stored Gemini Key
       function getStoredGeminiKey() {
         const key = localStorage.getItem('GEMINI_API_KEY') || '';
-        // Invalidate error strings or strings with spaces accidentally saved
         if (key && (key.includes(' ') || key.includes('Failed') || key.length < 15)) {
           localStorage.removeItem('GEMINI_API_KEY');
           return '';
@@ -2331,8 +2364,8 @@
         if (key) {
           geminiNavBtn.classList.add('active');
           geminiBtnText.textContent = 'Gemini AI Active ✨';
-          geminiUnlockBanner.style.display = 'none';
-          geminiActiveContent.style.display = 'block';
+          if (geminiUnlockBanner) geminiUnlockBanner.style.display = 'none';
+          if (geminiActiveContent) geminiActiveContent.style.display = 'block';
         } else {
           geminiNavBtn.classList.remove('active');
           geminiBtnText.textContent = 'Setup Gemini AI ⚡';
@@ -2342,18 +2375,34 @@
       // Initial Gemini UI State
       updateGeminiUIState();
 
-      // Modal Handlers
+      // Modal Handlers with Apple Sheet interactions
       geminiNavBtn.addEventListener('click', () => {
+        playAppleTick(650);
         geminiKeyInput.value = getStoredGeminiKey();
         geminiModal.classList.add('open');
-        geminiKeyInput.focus();
+        setTimeout(() => geminiKeyInput.focus(), 100);
       });
 
       modalCloseBtn.addEventListener('click', () => {
+        playAppleTick(450);
         geminiModal.classList.remove('open');
       });
 
+      geminiModal.addEventListener('click', (e) => {
+        if (e.target === geminiModal) {
+          playAppleTick(450);
+          geminiModal.classList.remove('open');
+        }
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && geminiModal.classList.contains('open')) {
+          geminiModal.classList.remove('open');
+        }
+      });
+
       modalSaveBtn.addEventListener('click', () => {
+        playAppleTick(950);
         setStoredGeminiKey(geminiKeyInput.value);
         geminiModal.classList.remove('open');
         if (currentTicker) {
@@ -2361,15 +2410,18 @@
         }
       });
 
-      bannerKeyBtn.addEventListener('click', () => {
-        const val = bannerKeyInput.value.trim();
-        if (val) {
-          setStoredGeminiKey(val);
-          if (currentTicker) {
-            executeStockAnalysis(currentTicker);
+      if (bannerKeyBtn) {
+        bannerKeyBtn.addEventListener('click', () => {
+          playAppleTick(950);
+          const val = bannerKeyInput.value.trim();
+          if (val) {
+            setStoredGeminiKey(val);
+            if (currentTicker) {
+              executeStockAnalysis(currentTicker);
+            }
           }
-        }
-      });
+        });
+      }
 
       // Set copyright year
       const yearEl = document.getElementById('currentYear');
@@ -2377,7 +2429,7 @@
 
       // Navbar scroll effect
       window.addEventListener('scroll', () => {
-        if (window.scrollY > 30) {
+        if (window.scrollY > 20) {
           navbar.classList.add('scrolled');
         } else {
           navbar.classList.remove('scrolled');
@@ -2392,6 +2444,7 @@
       // Quick chip clicks
       chipButtons.forEach(btn => {
         btn.addEventListener('click', () => {
+          playAppleTick(850);
           const ticker = btn.getAttribute('data-ticker');
           tickerInput.value = ticker;
           executeStockAnalysis(ticker);
@@ -2401,6 +2454,7 @@
       // Form submission
       tickerForm.addEventListener('submit', (e) => {
         e.preventDefault();
+        playAppleTick(900);
         const ticker = tickerInput.value.trim().toUpperCase();
         if (ticker) {
           executeStockAnalysis(ticker);
@@ -2446,14 +2500,12 @@
       }
 
       /* --------------------------------------------------------------------------
-         API EXECUTION: /api/analyze?ticker=SYMBOL (ROBUST MULTI-PORT ROUTING)
+         API EXECUTION: /api/analyze?ticker=SYMBOL
          -------------------------------------------------------------------------- */
       function getApiUrl(path) {
-        // If loaded directly from backend on port 3000, keep relative
         if (window.location.port === '3000') {
           return path;
         }
-        // If loaded from static server (e.g. port 8080) or file://, target backend on port 3000
         return `http://localhost:3000${path}`;
       }
 
@@ -2462,7 +2514,6 @@
         let res;
         try {
           res = await fetch(primaryUrl, options);
-          // If returned 404 and we tried a relative URL, fallback to localhost:3000
           if (res.status === 404 && !primaryUrl.startsWith('http://localhost:3000')) {
             console.warn(`Endpoint ${primaryUrl} returned 404. Falling back to http://localhost:3000${path}...`);
             primaryUrl = `http://localhost:3000${path}`;
@@ -2522,7 +2573,7 @@
       }
 
       /* --------------------------------------------------------------------------
-         RENDER DASHBOARD METRICS & GEMINI SYNTHESIS (ERROR-RESILIENT)
+         RENDER DASHBOARD METRICS & DATA BINDINGS
          -------------------------------------------------------------------------- */
       function safeSetText(idOrEl, value) {
         try {
@@ -2603,7 +2654,7 @@
           (skill.supporting_points || ["Strong quantitative momentum scores", "Solid fundamental margins"]).forEach(pt => {
             const li = document.createElement('li');
             li.style.cssText = "display: flex; gap: 8px; font-size: 0.88rem; color: var(--text-secondary);";
-            li.innerHTML = `<span style="color: var(--color-cyan);">✓</span><span>${escapeHtml(pt)}</span>`;
+            li.innerHTML = `<span style="color: var(--sf-green);">✓</span><span>${escapeHtml(pt)}</span>`;
             pointsList.appendChild(li);
           });
         }
@@ -2614,7 +2665,7 @@
           (skill.caveats || ["FINRA short interest lags by ~2 weeks", "Macro volatility may influence short-term entries"]).forEach(cv => {
             const li = document.createElement('li');
             li.style.cssText = "display: flex; gap: 8px; font-size: 0.88rem; color: var(--text-secondary);";
-            li.innerHTML = `<span style="color: var(--color-amber);">⚠️</span><span>${escapeHtml(cv)}</span>`;
+            li.innerHTML = `<span style="color: var(--sf-amber);">⚠️</span><span>${escapeHtml(cv)}</span>`;
             caveatsList.appendChild(li);
           });
         }
@@ -2651,11 +2702,11 @@
 
           qualityProgressFill.style.width = `${passRate}%`;
           if (passedCount >= 5) {
-            qualityProgressFill.style.background = 'linear-gradient(90deg, var(--color-cyan), var(--color-green))';
+            qualityProgressFill.style.background = 'linear-gradient(90deg, var(--sf-blue), var(--sf-green))';
           } else if (passedCount >= 3) {
-            qualityProgressFill.style.background = 'linear-gradient(90deg, var(--color-amber), var(--color-cyan))';
+            qualityProgressFill.style.background = 'linear-gradient(90deg, var(--sf-amber), var(--sf-blue))';
           } else {
-            qualityProgressFill.style.background = 'linear-gradient(90deg, var(--color-coral), var(--color-amber))';
+            qualityProgressFill.style.background = 'linear-gradient(90deg, var(--sf-red), var(--sf-amber))';
           }
 
           qualityChecksGrid.innerHTML = '';
@@ -2668,7 +2719,7 @@
                   <span class="quality-item-title">${escapeHtml(c.name)}</span>
                   <span class="quality-status-badge ${c.passed ? 'passed' : 'failed'}">${c.passed ? 'PASS ✓' : 'FAIL ✗'}</span>
                 </div>
-                <div class="quality-item-val" style="color: ${c.passed ? 'var(--color-green)' : 'var(--color-coral)'};">
+                <div class="quality-item-val" style="color: ${c.passed ? 'var(--sf-green)' : 'var(--sf-red)'};">
                   ${escapeHtml(c.display || 'N/A')}
                 </div>
                 <div class="quality-target-rule">Target: ${escapeHtml(c.rule || c.target || '')}</div>
@@ -2740,11 +2791,11 @@
               card.target = '_blank';
               card.rel = 'noopener noreferrer';
 
-              const sentColor = item.sentiment === 'Bullish' ? 'var(--color-green)' : item.sentiment === 'Bearish' ? 'var(--color-coral)' : 'var(--text-muted)';
+              const sentColor = item.sentiment === 'Bullish' ? 'var(--sf-green)' : item.sentiment === 'Bearish' ? 'var(--sf-red)' : 'var(--text-muted)';
               card.innerHTML = `
                 <div class="news-meta-row">
                   <span class="news-source">${escapeHtml(item.source || 'Financial Wire')}</span>
-                  <span style="color: ${sentColor}; font-weight: 700;">${item.sentiment || 'Neutral'}</span>
+                  <span style="color: ${sentColor}; font-weight: 600;">${item.sentiment || 'Neutral'}</span>
                 </div>
                 <div class="news-headline">${escapeHtml(item.title)}</div>
                 <div style="font-size: 0.72rem; color: var(--text-muted);">${escapeHtml(item.published || '')}</div>
@@ -2770,7 +2821,7 @@
           `;
         }
 
-        // Reveal Dashboard
+        // Reveal Dashboard with Apple fluid animation
         if (resultsDashboard) {
           resultsDashboard.style.display = 'block';
           resultsDashboard.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -2807,7 +2858,7 @@
           ]).forEach(b => {
             const li = document.createElement('li');
             li.style.cssText = "display: flex; gap: 8px; font-size: 0.88rem; color: var(--text-primary);";
-            li.innerHTML = `<span style="color: var(--color-green);">▲</span><span>${escapeHtml(b)}</span>`;
+            li.innerHTML = `<span style="color: var(--sf-green);">▲</span><span>${escapeHtml(b)}</span>`;
             bullList.appendChild(li);
           });
         }
@@ -2823,7 +2874,7 @@
           ]).forEach(r => {
             const li = document.createElement('li');
             li.style.cssText = "display: flex; gap: 8px; font-size: 0.88rem; color: var(--text-primary);";
-            li.innerHTML = `<span style="color: var(--color-coral);">▼</span><span>${escapeHtml(r)}</span>`;
+            li.innerHTML = `<span style="color: var(--sf-red);">▼</span><span>${escapeHtml(r)}</span>`;
             bearList.appendChild(li);
           });
         }
@@ -2838,6 +2889,8 @@
       async function sendCopilotMessage(userMessage) {
         if (!userMessage.trim()) return;
 
+        playAppleTick(750);
+
         // Append user bubble
         const userBubble = document.createElement('div');
         userBubble.className = 'chat-msg user';
@@ -2849,7 +2902,7 @@
         if (!geminiKey) {
           const warnBubble = document.createElement('div');
           warnBubble.className = 'chat-msg ai';
-          warnBubble.innerHTML = `⚠️ <em>Gemini API key is required to chat. Click the <strong>Setup Gemini AI</strong> button in the top navigation to add your free key.</em>`;
+          warnBubble.innerHTML = `⚠️ <em>Gemini API key is required to chat. Click the <strong>Gemini AI Setup</strong> button in the top navigation to add your key.</em>`;
           copilotChatBox.appendChild(warnBubble);
           copilotChatBox.scrollTop = copilotChatBox.scrollHeight;
           return;
@@ -2891,8 +2944,9 @@
           }
 
           aiBubble.innerHTML = escapeHtml(resData.reply).replace(/\n/g, '<br>');
+          playAppleTick(1100, 0.02);
         } catch (err) {
-          aiBubble.innerHTML = `<span style="color: var(--color-coral);">Error: ${escapeHtml(err.message)}</span>`;
+          aiBubble.innerHTML = `<span style="color: var(--sf-red);">Error: ${escapeHtml(err.message)}</span>`;
         } finally {
           copilotChatBox.scrollTop = copilotChatBox.scrollHeight;
         }
@@ -2913,11 +2967,11 @@
       });
 
       /* --------------------------------------------------------------------------
-         CANDLESTICK & AREA CHART RENDERING ENGINE (VANILLA SVG)
+         APPLE STOCKS CHART RENDERING ENGINE & INTERACTIVE SCRUBBER
          -------------------------------------------------------------------------- */
       function renderChart(candles) {
         if (!candles || candles.length === 0) {
-          chartSvg.innerHTML = '<text x="500" y="180" fill="#94A3B8" font-size="16" text-anchor="middle">No historical candle data available</text>';
+          chartSvg.innerHTML = '<text x="500" y="180" fill="rgba(255,255,255,0.4)" font-size="14" font-family="-apple-system, sans-serif" text-anchor="middle">No historical candle data available</text>';
           return;
         }
 
@@ -2926,7 +2980,7 @@
         const padTop = 30;
         const padBottom = 60;
         const chartHeight = height - padTop - padBottom;
-        const volHeight = 45;
+        const volHeight = 44;
 
         const prices = candles.flatMap(c => [c.high, c.low]);
         let minPrice = Math.min(...prices);
@@ -2953,28 +3007,29 @@
 
         let svgHtml = `
           <defs>
-            <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#8E75FF" stop-opacity="0.35" />
-              <stop offset="100%" stop-color="#00F0FF" stop-opacity="0.0" />
+            <linearGradient id="appleAreaGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#0A84FF" stop-opacity="0.32" />
+              <stop offset="100%" stop-color="#0A84FF" stop-opacity="0.0" />
             </linearGradient>
             <linearGradient id="bullVolGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#39FF14" stop-opacity="0.4" />
-              <stop offset="100%" stop-color="#39FF14" stop-opacity="0.1" />
+              <stop offset="0%" stop-color="#30D158" stop-opacity="0.3" />
+              <stop offset="100%" stop-color="#30D158" stop-opacity="0.08" />
             </linearGradient>
             <linearGradient id="bearVolGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#FF3E3E" stop-opacity="0.4" />
-              <stop offset="100%" stop-color="#FF3E3E" stop-opacity="0.1" />
+              <stop offset="0%" stop-color="#FF453A" stop-opacity="0.3" />
+              <stop offset="100%" stop-color="#FF453A" stop-opacity="0.08" />
             </linearGradient>
           </defs>
         `;
 
+        // Apple Gridlines (hairline transparent rules)
         const gridSteps = 4;
         for (let g = 0; g <= gridSteps; g++) {
           const y = padTop + (g / gridSteps) * chartHeight;
           const priceAtY = maxPrice - (g / gridSteps) * priceRange;
           svgHtml += `
-            <line x1="0" y1="${y}" x2="${width}" y2="${y}" stroke="rgba(255, 255, 255, 0.05)" stroke-dasharray="3,3" />
-            <text x="${width - 10}" y="${y - 4}" fill="#64748B" font-size="11" font-family="'Space Grotesk', sans-serif" text-anchor="end">$${priceAtY.toFixed(2)}</text>
+            <line x1="0" y1="${y}" x2="${width}" y2="${y}" stroke="rgba(255, 255, 255, 0.06)" stroke-dasharray="2,3" />
+            <text x="${width - 12}" y="${y - 5}" fill="rgba(255, 255, 255, 0.35)" font-size="11" font-family="-apple-system, sans-serif" text-anchor="end" font-variant-numeric="tabular-nums">$${priceAtY.toFixed(2)}</text>
           `;
         }
 
@@ -2985,20 +3040,22 @@
         const getX = (idx) => (idx + 0.5) * candleSpacing;
         const getY = (price) => padTop + chartHeight - ((price - minPrice) / priceRange) * chartHeight;
 
+        // Volume histogram
         candles.forEach((c, i) => {
           const x = getX(i);
           const barH = (c.volume / maxVol) * volHeight;
           const y = height - barH - 8;
           const isBull = c.close >= c.open;
           const fill = isBull ? 'url(#bullVolGrad)' : 'url(#bearVolGrad)';
-          svgHtml += `<rect x="${x - candleWidth / 2}" y="${y}" width="${candleWidth}" height="${barH}" fill="${fill}" rx="1" />`;
+          svgHtml += `<rect x="${x - candleWidth / 2}" y="${y}" width="${candleWidth}" height="${barH}" fill="${fill}" rx="1.5" />`;
         });
 
+        // Price Action Mode
         if (chartDisplayMode === 'candlestick') {
           candles.forEach((c, i) => {
             const x = getX(i);
             const isBull = c.close >= c.open;
-            const color = isBull ? '#39FF14' : '#FF3E3E';
+            const color = isBull ? '#30D158' : '#FF453A';
             const yHigh = getY(c.high);
             const yLow = getY(c.low);
             const yOpen = getY(c.open);
@@ -3006,8 +3063,8 @@
             const bodyY = Math.min(yOpen, yClose);
             const bodyH = Math.max(2, Math.abs(yOpen - yClose));
 
-            svgHtml += `<line x1="${x}" y1="${yHigh}" x2="${x}" y2="${yLow}" stroke="${color}" stroke-width="1.4" stroke-linecap="round" />`;
-            svgHtml += `<rect x="${x - candleWidth / 2}" y="${bodyY}" width="${candleWidth}" height="${bodyH}" fill="${color}" rx="1" />`;
+            svgHtml += `<line x1="${x}" y1="${yHigh}" x2="${x}" y2="${yLow}" stroke="${color}" stroke-width="1.5" stroke-linecap="round" />`;
+            svgHtml += `<rect x="${x - candleWidth / 2}" y="${bodyY}" width="${candleWidth}" height="${bodyH}" fill="${color}" rx="2" />`;
           });
         } else {
           let areaPath = `M ${getX(0)} ${getY(candles[0].close)}`;
@@ -3022,31 +3079,56 @@
 
           areaPath += ` L ${getX(candles.length - 1)} ${padTop + chartHeight} L ${getX(0)} ${padTop + chartHeight} Z`;
 
-          svgHtml += `<path d="${areaPath}" fill="url(#areaGradient)" />`;
-          svgHtml += `<path d="${linePath}" fill="none" stroke="#8E75FF" stroke-width="2.6" stroke-linecap="round" />`;
+          svgHtml += `<path d="${areaPath}" fill="url(#appleAreaGradient)" />`;
+          svgHtml += `<path d="${linePath}" fill="none" stroke="#0A84FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />`;
         }
 
+        // 20-Day SMA Line
         if (smaPoints.length > 1) {
           let smaPath = `M ${getX(smaPoints[0].index)} ${getY(smaPoints[0].val)}`;
           for (let s = 1; s < smaPoints.length; s++) {
             smaPath += ` L ${getX(smaPoints[s].index)} ${getY(smaPoints[s].val)}`;
           }
-          svgHtml += `<path d="${smaPath}" fill="none" stroke="#00F0FF" stroke-width="1.8" stroke-dasharray="4,3" opacity="0.8" />`;
+          svgHtml += `<path d="${smaPath}" fill="none" stroke="#FF9F0A" stroke-width="1.8" stroke-dasharray="4,3" opacity="0.85" />`;
         }
 
+        // Dynamic Scrubber Elements (Hairline Crosshair)
+        svgHtml += `
+          <g id="chartScrubberGroup" style="opacity: 0; transition: opacity 120ms ease;">
+            <line id="scrubberVLine" x1="0" y1="0" x2="0" y2="${height}" stroke="rgba(255, 255, 255, 0.35)" stroke-width="1.2" stroke-dasharray="3,3" />
+            <circle id="scrubberDot" cx="0" cy="0" r="4.5" fill="#FFFFFF" stroke="#0A84FF" stroke-width="2" />
+          </g>
+        `;
+
         chartSvg.innerHTML = svgHtml;
-        setupChartHover(candles, getX, candleSpacing);
+        setupChartHover(candles, getX, getY, candleSpacing);
       }
 
-      function setupChartHover(candles, getX, candleSpacing) {
-        chartViewport.onmousemove = (e) => {
+      function setupChartHover(candles, getX, getY, candleSpacing) {
+        const scrubberGroup = document.getElementById('chartScrubberGroup');
+        const scrubberVLine = document.getElementById('scrubberVLine');
+        const scrubberDot = document.getElementById('scrubberDot');
+
+        function updateScrubber(e) {
           const rect = chartViewport.getBoundingClientRect();
-          const mouseX = e.clientX - rect.left;
+          const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+          const mouseX = Math.max(0, Math.min(rect.width, clientX - rect.left));
           const svgX = (mouseX / rect.width) * 1000;
 
           const index = Math.max(0, Math.min(candles.length - 1, Math.floor(svgX / candleSpacing)));
           const c = candles[index];
           if (!c) return;
+
+          const cx = getX(index);
+          const cy = getY(c.close);
+
+          if (scrubberGroup && scrubberVLine && scrubberDot) {
+            scrubberGroup.style.opacity = '1';
+            scrubberVLine.setAttribute('x1', cx);
+            scrubberVLine.setAttribute('x2', cx);
+            scrubberDot.setAttribute('cx', cx);
+            scrubberDot.setAttribute('cy', cy);
+          }
 
           document.getElementById('hoverDate').textContent = c.date;
           document.getElementById('hoverOpen').textContent = `$${c.open.toFixed(2)}`;
@@ -3058,10 +3140,22 @@
             : `${(c.volume / 1000).toFixed(0)}K`;
 
           chartHoverCard.style.display = 'flex';
-        };
+        }
+
+        chartViewport.onmousemove = updateScrubber;
+        chartViewport.ontouchmove = updateScrubber;
+
+        function hideScrubber() {
+          if (scrubberGroup) scrubberGroup.style.opacity = '0';
+          if (chartHoverCard) chartHoverCard.style.display = 'none';
+        }
+
+        chartViewport.onmouseleave = hideScrubber;
+        chartViewport.ontouchend = hideScrubber;
       }
 
       btnModeCandle.addEventListener('click', () => {
+        playAppleTick(800);
         chartDisplayMode = 'candlestick';
         btnModeCandle.classList.add('active');
         btnModeArea.classList.remove('active');
@@ -3069,6 +3163,7 @@
       });
 
       btnModeArea.addEventListener('click', () => {
+        playAppleTick(850);
         chartDisplayMode = 'area';
         btnModeArea.classList.add('active');
         btnModeCandle.classList.remove('active');
@@ -3085,8 +3180,7 @@
           .replace(/'/g, '&#039;');
       }
 
-      // Initial Demo Analysis on AAPL
-      executeStockAnalysis('AAPL');
+      // Startup state: Ready for user input, do not auto-analyze on startup
 
     });
   </script>

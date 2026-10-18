@@ -16,6 +16,7 @@ import sys
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 
 PORT = 3000
@@ -181,7 +182,7 @@ def get_gemini_api_key(headers, query_params=None, body_json=None):
     return os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY") or ""
 
 
-def call_gemini_api_raw(api_key, prompt, model="gemini-2.5-flash"):
+def call_gemini_api_raw(api_key, prompt, model="gemini-2.0-flash"):
     """Call Google Gemini REST API directly using standard urllib."""
     url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
     payload = {
@@ -214,10 +215,9 @@ def call_gemini_api_raw(api_key, prompt, model="gemini-2.5-flash"):
             return ""
     except urllib.error.HTTPError as http_err:
         err_body = http_err.read().decode("utf-8", errors="ignore")
-        # If gemini-2.5-flash not found or quota, try fallback to gemini-2.0-flash
-        if model != "gemini-2.0-flash":
-            print(f"Fallback to gemini-2.0-flash after: {http_err.code}")
-            return call_gemini_api_raw(api_key, prompt, model="gemini-2.0-flash")
+        if model != "gemini-1.5-flash":
+            print(f"Fallback to gemini-1.5-flash after: {http_err.code}")
+            return call_gemini_api_raw(api_key, prompt, model="gemini-1.5-flash")
         raise RuntimeError(f"Gemini API error ({http_err.code}): {err_body}")
 
 
@@ -502,12 +502,15 @@ class StockAnalyticsHandler(http.server.SimpleHTTPRequestHandler):
                 return
 
             try:
-                # 1. Run the installed skill
-                skill_data = run_stock_analysis_skill(ticker)
-                # 2. Fetch historical candle bars for chart
-                history_data = fetch_historical_bars(ticker)
-                # 3. Fetch breaking news & sentiment
-                news_data = fetch_news(ticker)
+                # 1. Run skill script, historical chart bars, and breaking news concurrently
+                with ThreadPoolExecutor(max_workers=3) as executor:
+                    skill_future = executor.submit(run_stock_analysis_skill, ticker)
+                    history_future = executor.submit(fetch_historical_bars, ticker)
+                    news_future = executor.submit(fetch_news, ticker)
+
+                    skill_data = skill_future.result()
+                    history_data = history_future.result()
+                    news_data = news_future.result()
 
                 # 4. Check for Gemini API Key to perform deeper analysis
                 gemini_key = get_gemini_api_key(self.headers, query_params)
